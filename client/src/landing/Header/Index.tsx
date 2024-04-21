@@ -6,7 +6,7 @@ import Circle from './Circle'
 
 function Index() {
     return (
-        <div className='HEADER relative bg-[#090A18] h-screen text-white text-opacity-90'>
+        <div className='HEADER relative bg-[#090A18] text-white text-opacity-90'>
             < Navigation />
             <Text />
             <SeeMoreBtn />

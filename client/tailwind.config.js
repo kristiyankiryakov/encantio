@@ -6,8 +6,15 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        electricGreen: '#BCEF30',
+        customGray: '#C0C0C0',
+        cardBackground: '#171826',
+      },
+
       backgroundImage: {
         'radial-gradient': 'radial-gradient(circle farthest-side, #D782FF, #090A18)',
+        'radial-gradient-product': 'radial-gradient(circle farthest-side, #D782FF, #171826)',
       },
 
     },
