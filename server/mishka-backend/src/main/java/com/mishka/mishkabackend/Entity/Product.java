@@ -24,11 +24,14 @@ public class Product extends BaseEntity {
     @Column(nullable = false)
     private int stock;
 
-    @ElementCollection
-    @Lob
-    private List<byte[]> images;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private List<OrderItem> orderItems;
+    private List<String> images;
 
+
+//    public Product(String title, String description, int stock, List<String> images) {
+//        this.title = title;
+//        this.description = description;
+//        this.stock = stock;
+//        this.images = images;
+//    }
 }
