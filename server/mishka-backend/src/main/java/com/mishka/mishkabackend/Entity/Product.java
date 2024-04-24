@@ -27,11 +27,4 @@ public class Product extends BaseEntity {
 
     private List<String> images;
 
-
-//    public Product(String title, String description, int stock, List<String> images) {
-//        this.title = title;
-//        this.description = description;
-//        this.stock = stock;
-//        this.images = images;
-//    }
 }

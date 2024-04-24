@@ -24,40 +24,26 @@ public class ProductController {
     ) {
         return productService.getAllProducts(pageNumber, pageSize);
     }
-//
-//    @PostMapping("/products")
-//    Product newProduct(@RequestBody Product newProduct) {
-//        return productRepository.save(newProduct);
-//    }
-//
-//
-//    @GetMapping("/products/{id}")
-//    Product one(@PathVariable Integer id) {
-//
-//        return productRepository.findById(id)
-//                .orElseThrow(() -> new ProductNotFoundException(id));
-//    }
-//
-//    @PutMapping("/products/{id}")
-//    Product replaceProduct(@RequestBody Product newProduct, @PathVariable Integer id) {
-//        return productRepository.findById(id)
-//                .map(product -> {
-//                    product.setTitle(newProduct.getTitle());
-//                    product.setDescription(newProduct.getDescription());
-//                    product.setImages(newProduct.getImages());
-//                    product.setStock(newProduct.getStock());
-//
-//                    return productRepository.save(product);
-//                })
-//                .orElseGet(() -> {
-//                    newProduct.setId(id);
-//                    return productRepository.save(newProduct);
-//                });
-//    }
-//
-//    @DeleteMapping("/products/{id}")
-//    void deleteProductById(@PathVariable Integer id) {
-//        productRepository.deleteById(id);
-//    }
+
+    @PostMapping("/products")
+    Product newProduct(@RequestBody Product newProduct) {
+        return productService.createProduct(newProduct);
+    }
+
+
+    @GetMapping("/products/{id}")
+    Product one(@PathVariable Integer id) {
+        return productService.findProductById(id);
+    }
+
+    @PutMapping("/products/{id}")
+    Product updateProduct(@RequestBody Product newProduct, @PathVariable Integer id) {
+        return productService.updateProduct(newProduct, id);
+    }
+
+    @DeleteMapping("/products/{id}")
+    Void deleteProductById(@PathVariable Integer id) {
+        return productService.deleteProduct(id);
+    }
 
 }
