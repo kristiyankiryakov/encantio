@@ -18,8 +18,11 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    List<Product> all() {
-        return productService.getAllProducts();
+    List<Product> all(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "20") int pageSize
+    ) {
+        return productService.getAllProducts(pageNumber, pageSize);
     }
 //
 //    @PostMapping("/products")
