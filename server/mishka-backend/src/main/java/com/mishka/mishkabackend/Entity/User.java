@@ -3,6 +3,7 @@ package com.mishka.mishkabackend.Entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,8 +17,9 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User extends BaseEntity{
-    @Column(nullable = false, unique = true)
-    private String username;
+
+    @Email(message = "Please provide a valid email.")
+    private String email;
 
     @Column(nullable = false)
     private String firstName;
