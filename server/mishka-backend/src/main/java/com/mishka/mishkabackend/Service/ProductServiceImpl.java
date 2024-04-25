@@ -1,7 +1,7 @@
 package com.mishka.mishkabackend.Service;
 
 import com.mishka.mishkabackend.Entity.Product;
-import com.mishka.mishkabackend.Exception.ProductNotFoundException;
+import com.mishka.mishkabackend.Exception.NotFoundException;
 import com.mishka.mishkabackend.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product findProductById(Integer id) {
         return productRepository.findById(id)
-                .orElseThrow(() -> new ProductNotFoundException(id));
+                .orElseThrow(() -> new NotFoundException("product", id));
     }
 
     @Override
@@ -63,7 +63,8 @@ public class ProductServiceImpl implements ProductService {
             productRepository.deleteById(id);
             return null;
         } else {
-            throw new ProductNotFoundException(id);
+            throw new NotFoundException("product", id);
+
         }
     }
 
