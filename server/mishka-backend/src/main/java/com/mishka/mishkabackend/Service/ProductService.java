@@ -16,4 +16,6 @@ public interface ProductService {
     Product updateProduct(Product newProduct, Integer id);
 
     Void deleteProduct(Integer id) throws NotFoundException;
+
+    boolean doesProductExist(Integer id);
 }
