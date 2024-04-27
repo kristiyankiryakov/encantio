@@ -46,6 +46,7 @@ public class ProductServiceImpl implements ProductService {
                     product.setTitle(newProduct.getTitle());
                     product.setDescription(newProduct.getDescription());
                     product.setImages(newProduct.getImages());
+                    product.setPrice(newProduct.getPrice());
                     product.setStock(newProduct.getStock());
 
                     return productRepository.save(product);
@@ -66,6 +67,11 @@ public class ProductServiceImpl implements ProductService {
             throw new NotFoundException("product", id);
 
         }
+    }
+
+    @Override
+    public boolean doesProductExist(Integer id) {
+        return productRepository.existsById(id);
     }
 
 }
