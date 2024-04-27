@@ -4,6 +4,7 @@ import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Component
@@ -43,4 +44,17 @@ public class RestValidator {
             }
         }
     }
+
+    public void isValidIntegerId(Object id) {
+        if (id instanceof Integer) {
+
+        } else {
+            try {
+                throw new BadRequestException("Id:" + id + " must be of type Integer and not null");
+            } catch (BadRequestException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
 }
