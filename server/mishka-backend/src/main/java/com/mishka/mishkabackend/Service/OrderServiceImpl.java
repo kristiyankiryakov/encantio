@@ -89,6 +89,7 @@ public class OrderServiceImpl implements OrderService {
     private void addOrderItems(Order order, List<OrderItem> orderItems) {
 
         for (OrderItem orderItem : orderItems) {
+            restValidator.isValidIntegerId(orderItem.getProductId());
 
             if (!productService.doesProductExist(orderItem.getProductId())) {
                 throw new NotFoundException("Product", orderItem.getProductId());

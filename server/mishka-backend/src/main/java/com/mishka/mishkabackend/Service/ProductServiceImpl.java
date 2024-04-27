@@ -3,6 +3,7 @@ package com.mishka.mishkabackend.Service;
 import com.mishka.mishkabackend.Entity.Product;
 import com.mishka.mishkabackend.Exception.NotFoundException;
 import com.mishka.mishkabackend.Repository.ProductRepository;
+import com.mishka.mishkabackend.Validator.RestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +18,13 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Autowired
+    private RestValidator restValidator;
+
+    @Autowired
     public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
+
 
     @Override
     public List<Product> getAllProducts(int pageNumber, int pageSize) {
@@ -41,6 +46,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product updateProduct(Product newProduct, Integer id) {
+
+        restValidator.isValidIntegerId(id);
+
+        if (!this.doesProductExist(id)) {
+            throw new NotFoundException("Product", id);
+        }
+
         return productRepository.findById(id)
                 .map(product -> {
                     product.setTitle(newProduct.getTitle());
