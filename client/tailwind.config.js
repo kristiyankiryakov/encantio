@@ -15,6 +15,8 @@ export default {
       backgroundImage: {
         'radial-gradient': 'radial-gradient(circle farthest-side, #D782FF, #090A18)',
         'radial-gradient-product': 'radial-gradient(circle farthest-side, #D782FF, #171826)',
+        'rainbow-gradient-top-half': 'radial-gradient(circle farthest-side at top, #171826, #D782FF); radial-gradient(circle farthest-side at bottom, #171826, #D782FF)',
+        // 'rainbow-gradient-bottom-half': '',
       },
 
     },
