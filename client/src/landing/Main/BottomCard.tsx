@@ -9,15 +9,15 @@ const BottomCard = (props: Props) => {
         <div className='text-pretty select-none bottom-card border border-1 border-white mt-20 bg-[#171826]'>
             <div className='flex p-6 justify-between'>
 
-                <div className='flex flex-col justify-between'>
-                    <div className='text-container max-w-[34.625rem]'>
+                <div className='flex flex-col justify-between gap-8'>
+                    <div className='text-container max-w-lg'>
                         <p className=' text-white text-opacity-70 text-3xl'>Не намираш точно за твоя модел?</p>
                         <p className='text-white text-3xl'>Открий <span className='text-electricGreen'>универсалните</span> крачета!</p>
 
                         <p className='text-[#C0C0C0] text-md mt-2 '>Прецизни и издръжливи крачета, специално проектирани за плавно движение и бързи реакции.</p>
                     </div>
 
-                    <div className='flex flex-wrap select-none text-customGray gap-2 max-w-[30.625rem]'>
+                    <div className='flex flex-wrap select-none text-customGray gap-2 max-w-lg'>
                         <div className='tag px-3 py-1 bg-gray-800 rounded-md'>Logitech</div>
                         <div className='tag px-3 py-1 bg-gray-800 rounded-md'>Logitech</div>
                         <div className='tag px-3 py-1 bg-gray-800 rounded-md'>Logitech</div>

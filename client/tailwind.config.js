@@ -6,10 +6,14 @@ export default {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        "comfortGrid": 'box-shadow: 0px 4px 50px 0px  #BCEF30'
+      },
       colors: {
         electricGreen: '#BCEF30',
         customGray: '#C0C0C0',
         cardBackground: '#171826',
+
       },
 
       backgroundImage: {

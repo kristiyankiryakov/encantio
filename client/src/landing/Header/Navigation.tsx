@@ -2,7 +2,7 @@ import React from 'react'
 
 function Navigation() {
     return (
-        <div className='p-4'>
+        <div className='p-4 bg-[#090A18]'>
 
             <nav className='py-3 px-6 NAVIGATION border bg-[#090A18] border-gray-300 border-opacity-25 rounded-md flex items-center justify-between w-6/12 mx-auto relative z-10'>
 

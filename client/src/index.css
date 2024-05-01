@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+
+    .up-separator {
+        clip-path: polygon(7% 87%, 93% 87%, 95% 100%, 100% 100%, 50% 100%, 0 100%, 5% 100%);
+    }
+
+    .down-separator {
+        clip-path: polygon(5% 0, 7% 31%, 93% 31%, 95% 0, 100% 0, 100% 100%, 0 100%, 0 0);
+    }
+
+}

@@ -22,7 +22,7 @@ function Index() {
 
             <BottomCard />
 
-
+           
         </div>
     )
 }
