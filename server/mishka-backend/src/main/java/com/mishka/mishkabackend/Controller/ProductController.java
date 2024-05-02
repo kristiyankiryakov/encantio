@@ -1,7 +1,7 @@
 package com.mishka.mishkabackend.Controller;
 
-import com.mishka.mishkabackend.Entity.Product;
-import com.mishka.mishkabackend.Service.ProductService;
+import com.mishka.mishkabackend.Entity.Product.Product;
+import com.mishka.mishkabackend.Service.Product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

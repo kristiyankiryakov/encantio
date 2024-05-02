@@ -1,8 +1,8 @@
-package com.mishka.mishkabackend.Service;
+package com.mishka.mishkabackend.Service.Product;
 
-import com.mishka.mishkabackend.Entity.Product;
+import com.mishka.mishkabackend.Entity.Product.Product;
 import com.mishka.mishkabackend.Exception.NotFoundException;
-import com.mishka.mishkabackend.Repository.ProductRepository;
+import com.mishka.mishkabackend.Repository.Product.ProductRepository;
 import com.mishka.mishkabackend.Validator.RestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -49,10 +49,6 @@ public class ProductServiceImpl implements ProductService {
 
         restValidator.isValidIntegerId(id);
 
-        if (!this.doesProductExist(id)) {
-            throw new NotFoundException("Product", id);
-        }
-
         return productRepository.findById(id)
                 .map(product -> {
                     product.setTitle(newProduct.getTitle());
@@ -79,11 +75,6 @@ public class ProductServiceImpl implements ProductService {
             throw new NotFoundException("product", id);
 
         }
-    }
-
-    @Override
-    public boolean doesProductExist(Integer id) {
-        return productRepository.existsById(id);
     }
 
 }

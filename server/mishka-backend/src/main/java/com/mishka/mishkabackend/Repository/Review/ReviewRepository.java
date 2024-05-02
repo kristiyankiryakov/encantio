@@ -1,4 +1,4 @@
-package com.mishka.mishkabackend.Repository;
+package com.mishka.mishkabackend.Repository.Review;
 
 import com.mishka.mishkabackend.Entity.Review.Review;
 import org.springframework.data.jpa.repository.JpaRepository;

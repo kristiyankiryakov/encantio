@@ -1,4 +1,4 @@
-package com.mishka.mishkabackend.Repository;
+package com.mishka.mishkabackend.Repository.Order;
 
 import com.mishka.mishkabackend.Entity.Order.OrderItem;
 import org.springframework.data.jpa.repository.JpaRepository;

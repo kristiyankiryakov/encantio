@@ -1,9 +1,8 @@
-package com.mishka.mishkabackend.Service;
+package com.mishka.mishkabackend.Service.Order;
 
-import com.mishka.mishkabackend.Entity.Order;
-import com.mishka.mishkabackend.Entity.OrderItem;
+import com.mishka.mishkabackend.Entity.Order.Order;
+import com.mishka.mishkabackend.Entity.Order.OrderItem;
 import com.mishka.mishkabackend.Exception.NotFoundException;
-import org.apache.coyote.BadRequestException;
 
 import java.util.List;
 
@@ -18,5 +17,17 @@ public interface OrderService {
     Order updateOrder(Order newOrder, Integer id);
 
     Void deleteOrder(Integer id) throws NotFoundException;
+
+
+    OrderItem getOrderItemById(Integer id) throws NotFoundException;
+
+    OrderItem createOrderItem(OrderItem orderItem);
+
+    OrderItem updateOrderItem(OrderItem orderItem, Integer id);
+
+    List<OrderItem> createOrderItems(List<OrderItem> orderItems);
+
+    Void deleteOrderItem(Integer id) throws NotFoundException;
+
 
 }

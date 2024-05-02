@@ -1,8 +1,8 @@
 package com.mishka.mishkabackend.Controller;
 
-import com.mishka.mishkabackend.Entity.Answer;
-import com.mishka.mishkabackend.Entity.Question;
-import com.mishka.mishkabackend.Service.FaqService;
+import com.mishka.mishkabackend.Entity.FAQ.Answer;
+import com.mishka.mishkabackend.Entity.FAQ.Question;
+import com.mishka.mishkabackend.Service.FAQ.FaqService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

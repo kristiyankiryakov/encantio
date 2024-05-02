@@ -1,4 +1,4 @@
-package com.mishka.mishkabackend.Repository;
+package com.mishka.mishkabackend.Repository.FAQ;
 
 import com.mishka.mishkabackend.Entity.FAQ.Question;
 import org.springframework.data.jpa.repository.JpaRepository;

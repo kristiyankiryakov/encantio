@@ -1,7 +1,9 @@
 package com.mishka.mishkabackend.Controller;
 
-import com.mishka.mishkabackend.Entity.Order;
-import com.mishka.mishkabackend.Service.OrderService;
+import com.mishka.mishkabackend.Entity.Order.Order;
+import com.mishka.mishkabackend.Entity.Order.OrderItem;
+import com.mishka.mishkabackend.Service.Order.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +14,7 @@ public class OrderController {
 
     private final OrderService orderService;
 
+    @Autowired
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
@@ -29,9 +32,19 @@ public class OrderController {
         return orderService.createOrder(newOrder.getEmail(), newOrder.getOrderItems());
     }
 
+    @PostMapping("/orderItems")
+    public List<OrderItem> createOrderItems(@RequestBody List<OrderItem> orderItems) {
+        return orderService.createOrderItems(orderItems);
+    }
+
     @GetMapping("/{id}")
     Order one(@PathVariable Integer id) {
         return orderService.findOrderById(id);
+    }
+
+    @GetMapping("/orderItems/{id}")
+    public OrderItem getOrderItemById(@PathVariable Integer id) {
+        return orderService.getOrderItemById(id);
     }
 
     @PutMapping("/{id}")
@@ -39,9 +52,19 @@ public class OrderController {
         return orderService.updateOrder(newOrder, id);
     }
 
+    @PutMapping("/orderItems/{id}")
+    public OrderItem updateOrderItem(@PathVariable Integer id, @RequestBody OrderItem orderItem) {
+        return orderService.updateOrderItem(orderItem, id);
+    }
+
     @DeleteMapping("/{id}")
     Void deleteOrderById(@PathVariable Integer id) {
         return orderService.deleteOrder(id);
+    }
+
+    @DeleteMapping("/orderItems/{id}")
+    Void deleteOrderItemById(@PathVariable Integer id) {
+        return orderService.deleteOrderItem(id);
     }
 
 }

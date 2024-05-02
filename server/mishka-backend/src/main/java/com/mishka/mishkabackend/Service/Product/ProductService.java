@@ -1,6 +1,6 @@
-package com.mishka.mishkabackend.Service;
+package com.mishka.mishkabackend.Service.Product;
 
-import com.mishka.mishkabackend.Entity.Product;
+import com.mishka.mishkabackend.Entity.Product.Product;
 import com.mishka.mishkabackend.Exception.NotFoundException;
 
 import java.util.List;
@@ -17,5 +17,4 @@ public interface ProductService {
 
     Void deleteProduct(Integer id) throws NotFoundException;
 
-    boolean doesProductExist(Integer id);
 }

@@ -1,5 +1,6 @@
-package com.mishka.mishkabackend.Entity;
+package com.mishka.mishkabackend.Entity.FAQ;
 
+import com.mishka.mishkabackend.Entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
