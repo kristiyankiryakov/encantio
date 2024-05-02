@@ -1,5 +1,7 @@
-package com.mishka.mishkabackend.Entity;
+package com.mishka.mishkabackend.Entity.Product;
 
+import com.mishka.mishkabackend.Entity.BaseEntity;
+import com.mishka.mishkabackend.Entity.Review.Review;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
@@ -33,4 +35,9 @@ public class Product extends BaseEntity {
 
     private List<String> images;
 
+    @OneToMany(mappedBy = "product")
+    private List<Review> reviews;
+
+    @Column(nullable = false)
+    private boolean isFeatured = false;
 }

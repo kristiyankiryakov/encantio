@@ -1,11 +1,11 @@
-package com.mishka.mishkabackend.Service;
+package com.mishka.mishkabackend.Service.FAQ;
 
-import com.mishka.mishkabackend.Entity.Answer;
-import com.mishka.mishkabackend.Entity.Question;
+import com.mishka.mishkabackend.Entity.FAQ.Answer;
+import com.mishka.mishkabackend.Entity.FAQ.Question;
 import com.mishka.mishkabackend.Enums.FaqType;
 import com.mishka.mishkabackend.Exception.NotFoundException;
-import com.mishka.mishkabackend.Repository.AnswerRepository;
-import com.mishka.mishkabackend.Repository.QuestionRepository;
+import com.mishka.mishkabackend.Repository.FAQ.AnswerRepository;
+import com.mishka.mishkabackend.Repository.FAQ.QuestionRepository;
 import com.mishka.mishkabackend.Validator.RestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class FaqServiceImplementation implements FaqService {
+public class FaqServiceImpl implements FaqService {
 
     @Autowired
     private QuestionRepository questionRepository;

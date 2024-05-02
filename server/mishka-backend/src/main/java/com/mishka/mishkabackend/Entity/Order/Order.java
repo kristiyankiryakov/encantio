@@ -1,5 +1,6 @@
-package com.mishka.mishkabackend.Entity;
+package com.mishka.mishkabackend.Entity.Order;
 
+import com.mishka.mishkabackend.Entity.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Email;
@@ -10,7 +11,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)

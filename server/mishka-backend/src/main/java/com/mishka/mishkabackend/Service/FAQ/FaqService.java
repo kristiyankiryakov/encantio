@@ -1,7 +1,7 @@
-package com.mishka.mishkabackend.Service;
+package com.mishka.mishkabackend.Service.FAQ;
 
-import com.mishka.mishkabackend.Entity.Answer;
-import com.mishka.mishkabackend.Entity.Question;
+import com.mishka.mishkabackend.Entity.FAQ.Answer;
+import com.mishka.mishkabackend.Entity.FAQ.Question;
 
 import java.util.List;
 import java.util.Map;

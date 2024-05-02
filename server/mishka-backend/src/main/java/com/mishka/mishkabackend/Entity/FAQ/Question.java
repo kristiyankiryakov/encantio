@@ -1,9 +1,8 @@
-package com.mishka.mishkabackend.Entity;
+package com.mishka.mishkabackend.Entity.FAQ;
 
-import jakarta.persistence.CascadeType;
+import com.mishka.mishkabackend.Entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

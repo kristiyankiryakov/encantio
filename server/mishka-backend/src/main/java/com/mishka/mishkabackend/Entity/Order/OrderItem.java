@@ -1,9 +1,9 @@
-package com.mishka.mishkabackend.Entity;
+package com.mishka.mishkabackend.Entity.Order;
 
+import com.mishka.mishkabackend.Entity.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
-import jdk.jfr.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
