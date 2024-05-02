@@ -2,10 +2,12 @@ package com.mishka.mishkabackend.Controller;
 
 import com.mishka.mishkabackend.Entity.Product.Product;
 import com.mishka.mishkabackend.Service.Product.ProductService;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("products")
@@ -40,6 +42,11 @@ public class ProductController {
     @PutMapping("/{id}")
     Product updateProduct(@RequestBody Product newProduct, @PathVariable Integer id) {
         return productService.updateProduct(newProduct, id);
+    }
+
+    @PatchMapping("/feature/{id}")
+    Product setProductFeature(@PathVariable Integer id, @RequestBody Map<String, Object> body) throws BadRequestException {
+        return productService.setProductFeature(id, body);
     }
 
     @DeleteMapping("/{id}")
