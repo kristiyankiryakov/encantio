@@ -2,8 +2,10 @@ package com.mishka.mishkabackend.Service.Product;
 
 import com.mishka.mishkabackend.Entity.Product.Product;
 import com.mishka.mishkabackend.Exception.NotFoundException;
+import org.apache.coyote.BadRequestException;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProductService {
 
@@ -17,4 +19,5 @@ public interface ProductService {
 
     Void deleteProduct(Integer id) throws NotFoundException;
 
+    Product setProductFeature(Integer id, Map<String, Object> body) throws BadRequestException;
 }

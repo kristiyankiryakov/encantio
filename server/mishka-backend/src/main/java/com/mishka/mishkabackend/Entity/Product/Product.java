@@ -39,5 +39,5 @@ public class Product extends BaseEntity {
     private List<Review> reviews;
 
     @Column(nullable = false)
-    private boolean isFeatured = false;
+    private Boolean featured = false;
 }
