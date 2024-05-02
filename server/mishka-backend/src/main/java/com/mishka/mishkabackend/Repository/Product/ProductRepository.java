@@ -1,9 +1,9 @@
 package com.mishka.mishkabackend.Repository;
 
-import com.mishka.mishkabackend.Entity.Review;
+import com.mishka.mishkabackend.Entity.Product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReviewRepository extends JpaRepository<Review,Long> {
+public interface ProductRepository extends JpaRepository<Product, Integer> {
 }

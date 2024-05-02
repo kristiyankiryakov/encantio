@@ -1,9 +1,8 @@
 package com.mishka.mishkabackend.Repository;
 
-import com.mishka.mishkabackend.Entity.Answer;
+import com.mishka.mishkabackend.Entity.FAQ.Answer;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;

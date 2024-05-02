@@ -1,9 +1,9 @@
 package com.mishka.mishkabackend.Repository;
 
-import com.mishka.mishkabackend.Entity.Order;
+import com.mishka.mishkabackend.Entity.Review.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Integer> {
+public interface ReviewRepository extends JpaRepository<Review,Long> {
 }
