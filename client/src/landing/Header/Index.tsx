@@ -10,7 +10,7 @@ function Index() {
             < Navigation />
             <Text />
             <SeeMoreBtn />
-            <Circle />
+            {/* <Circle /> */}
         </div>
     )
 }
