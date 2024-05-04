@@ -38,7 +38,7 @@ const BottomCard = (props: Props) => {
                         <div className='relative' >
                             <img className='w-full' src={feet} alt="mouse-feet" />
 
-                            <img className='absolute left-52 top-4' src={stars} alt="five-start-reviews" />
+                            {/* <img className='absolute left-52 top-4' src={stars} alt="five-start-reviews" /> */}
                         </div>
 
                     </div>

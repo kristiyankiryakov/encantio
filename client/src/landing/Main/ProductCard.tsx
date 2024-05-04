@@ -48,7 +48,8 @@ function ProductCard({ }: Props) {
             <div className='absolute -right-5 z-20' >
                 <img className='w-full' src={mouse} alt="mouse" />
             </div>
-            <div className='absolute top-0 h-[10rem] w-[10rem] left-44 z-0 rounded-full bg-radial-gradient-product opacity-15' ></div>
+            
+            {/* <div className='absolute top-0 h-[10rem] w-[10rem] left-44 z-0 rounded-full bg-radial-gradient-product opacity-15' ></div> */}
 
         </div>
 
