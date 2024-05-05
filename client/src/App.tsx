@@ -14,7 +14,7 @@ function App() {
       <div className='bg-[#090A18]' >
         < Header />
         <Main />
-        <UpSeparator />
+        <UpSeparator color='white' />
       </div>
 
       <div className='bg-white' >
@@ -25,7 +25,7 @@ function App() {
       </div>
 
       <div className='bg-[#090A18]' >
-        <UpSeparator />
+        <UpSeparator color='gray-200' />
         <SocialProof />
       </div>
 
