@@ -1,10 +1,12 @@
 import React from 'react'
 
-type Props = {}
+type Props = {
+    color: string
+}
 
-const UpSeparator = (props: Props) => {
+const UpSeparator = ({ color }: Props) => {
     return (
-        <div className="up-separator bg-white h-72 w-full "></div>
+        <div className={`up-separator bg-${color} h-72 w-full `}></div>
     )
 }
 
