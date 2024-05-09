@@ -6,6 +6,7 @@ import UpSeparator from './Separotors/UpSeparator'
 import Testimonial from './landing/Testimonial/Index'
 import DownSeparator from './Separotors/DownSeparator'
 import SocialProof from "./landing/SocialProof/Index"
+import FAQ from "./landing/FAQ/Index"
 
 function App() {
 
@@ -25,9 +26,11 @@ function App() {
       </div>
 
       <div className='bg-[#090A18]' >
-        <UpSeparator color='gray-200' />
+        <UpSeparator color='gray-100' />
         <SocialProof />
       </div>
+      <FAQ />
+
 
     </div>
   )

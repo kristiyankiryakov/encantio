@@ -17,6 +17,7 @@
     "react-router-dom": "^6.22.3",
     "sort-by": "^1.2.0",
     "tailwind-scrollbar": "^3.1.0",
+    "tw-elements-react": "^1.0.0-alpha2",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
