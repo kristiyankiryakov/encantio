@@ -4,7 +4,7 @@ function Navigation() {
     return (
         <div className='p-4 bg-[#090A18]'>
 
-            <nav className='py-3 2xl:px-6 NAVIGATION border bg-[#090A18] border-gray-300 border-opacity-25 rounded-md flex items-center justify-between 2xl:w-6/12 mx-auto relative z-10'>
+            <nav className='py-3 2xl:px-6 NAVIGATION  bg-[#090A18] border-[1px] border-white/20 border-opacity-5 rounded-md flex items-center justify-between 2xl:w-6/12 mx-auto relative z-10'>
 
                 <div className='LOGO'>ENACNTIO</div>
 

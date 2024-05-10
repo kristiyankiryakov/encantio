@@ -6,7 +6,7 @@ type Props = {}
 
 function ProductCard({ }: Props) {
     return (
-        <div className='z-20 flex flex-col gap-10 w-[27%] p-4 rounded-md border border-1 border-white  bg-cardBackground relative '>
+        <div className='z-20 flex flex-col gap-10 w-[27%] p-4 rounded-md border border-1 border-gray-200/20  bg-cardBackground relative '>
 
             <div className='Feet image select-none w-6/12 z-20'>
                 <img className='w-full' src={feet} alt="mouse-feet" />
