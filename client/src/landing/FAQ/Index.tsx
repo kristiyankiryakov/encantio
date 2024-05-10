@@ -15,7 +15,7 @@ const Index = (props: Props) => {
         }
     };
     return (
-        <div className="bg-gray-100">
+        <div className="bg-gray-100 pb-20">
             <h1 className="text-4xl text-center text-[#090A18] font-bold py-16">Често задавани въпроси</h1>
 
             <div id="accordionExample">

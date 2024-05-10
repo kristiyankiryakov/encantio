@@ -1,10 +1,12 @@
 import React from 'react'
 
-type Props = {}
+type Props = {
+    backgroundColor: string
+}
 
-export default function DownSeparator({ }: Props) {
+export default function DownSeparator({ backgroundColor }: Props) {
     return (
-        <div className='bg-white' >
+        <div className={`bg-[${backgroundColor}]`} >
             <div className="down-separator bg-[#090A18] h-32 w-full"></div>
         </div>
     )

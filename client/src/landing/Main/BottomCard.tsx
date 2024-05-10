@@ -6,7 +6,7 @@ type Props = {}
 
 const BottomCard = (props: Props) => {
     return (
-        <div className='text-pretty select-none bottom-card border border-1 border-white mt-20 bg-[#171826]'>
+        <div className='text-pretty select-none bottom-card border border-1 border-electricGreen/40 rounded-md mt-20 bg-[#171826]'>
             <div className='flex p-6 justify-between'>
 
                 <div className='flex flex-col justify-between gap-8'>
