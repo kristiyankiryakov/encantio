@@ -1,8 +1,6 @@
-import React from 'react'
 import Navigation from './Navigation'
-import Text from './Text'
 import SeeMoreBtn from './SeeMoreBtn'
-import Circle from './Circle'
+import Text from './Text'
 
 function Index() {
     return (

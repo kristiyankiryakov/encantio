@@ -1,10 +1,6 @@
-import React from 'react'
 import feet from "../../assets/feet-image.png";
-import stars from "../../assets/stars.png";
-import mouse from "../../assets/mouse-image.png";
-type Props = {}
 
-const BottomCard = (props: Props) => {
+const BottomCard = () => {
     return (
         <div className='text-pretty select-none bottom-card border border-1 border-electricGreen/40 rounded-md mt-20 bg-[#171826]'>
             <div className='flex p-6 justify-between'>

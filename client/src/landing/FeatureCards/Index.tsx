@@ -1,15 +1,12 @@
-import React from 'react';
-import star from "../../assets/star.png";
-import Perk from './Perk';
-import lightning from "../../assets/lightning.png";
-import square from "../../assets/square.png";
-import perkText from "./Text.tsx";
 import comfortGrid from "../../assets/comfort-grid.png";
 import divGrid from "../../assets/div-grid.png";
+import lightning from "../../assets/lightning.png";
+import square from "../../assets/square.png";
+import star from "../../assets/star.png";
+import Perk from './Perk';
+import perkText from "./Text.tsx";
 
-type Props = {};
-
-const Index = (props: Props) => {
+const Index = () => {
   return (
     <main>
 

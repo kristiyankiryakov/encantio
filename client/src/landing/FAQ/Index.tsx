@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { TECollapse } from "tw-elements-react";
-import Minus from "../../assets/minus.png"
 
-type Props = {}
-
-const Index = (props: Props) => {
+const Index = () => {
     const [activeElement, setActiveElement] = useState("");
 
     const handleClick = (value: string) => {

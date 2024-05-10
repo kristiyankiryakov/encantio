@@ -15,7 +15,7 @@ function Index() {
 
                 <div className='card-container flex w-full justify-between items-center' >
                     {
-                        [1, 2, 3].map((card) => {
+                        [1, 2, 3].map(() => {
                             return <ProductCard />
                         })
                     }
