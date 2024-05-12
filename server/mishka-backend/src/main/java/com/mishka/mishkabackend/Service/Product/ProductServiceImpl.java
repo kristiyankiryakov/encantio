@@ -54,7 +54,6 @@ public class ProductServiceImpl implements ProductService {
 
         return productRepository.findById(id)
                 .map(product -> {
-                    product.setTitle(newProduct.getTitle());
                     product.setDescription(newProduct.getDescription());
                     product.setImages(newProduct.getImages());
                     product.setPrice(newProduct.getPrice());
