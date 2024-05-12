@@ -4,6 +4,7 @@ import com.mishka.mishkabackend.Entity.BaseEntity;
 import com.mishka.mishkabackend.Entity.Review.Review;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,9 +20,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product extends BaseEntity {
-
-    @Column(nullable = false, unique = true)
-    private String title;
 
     @Column(nullable = false)
     private String description;
