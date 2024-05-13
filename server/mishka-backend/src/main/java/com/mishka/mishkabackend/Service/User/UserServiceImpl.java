@@ -4,6 +4,7 @@ import com.mishka.mishkabackend.Dtos.CredentialsDto;
 import com.mishka.mishkabackend.Dtos.SignUpDto;
 import com.mishka.mishkabackend.Dtos.UserDto;
 import com.mishka.mishkabackend.Entity.User;
+import com.mishka.mishkabackend.Exception.AppException;
 import com.mishka.mishkabackend.Exception.NotFoundException;
 
 
@@ -11,6 +12,7 @@ import com.mishka.mishkabackend.Repository.UserRepository;
 
 import com.mishka.mishkabackend.mapper.TestMappingMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,14 +41,14 @@ public class UserServiceImpl implements UserService {
             return testMappingMapper.toUserDto(user);
         }
 
-        throw new RuntimeException("Invalid password");
+        throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
     }
 
     public UserDto register(SignUpDto userDto) {
         Optional<User> optionalUser = userRepository.findByEmail(userDto.getEmail());
 
         if (optionalUser.isPresent()) {
-            throw new RuntimeException("user already exists");
+            throw new AppException("user already exists", HttpStatus.BAD_REQUEST);
         }
 
         User user = testMappingMapper.signUpToUser(userDto);
