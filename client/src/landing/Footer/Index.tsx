@@ -19,10 +19,10 @@ const Index = (props: Props) => {
 
                 <button className='text-white px-10 py-4 text-xl bg-[#090A18] w-fit rounded-md' >Разгледайте моделите</button>
 
-                <div className='flex justify-around items-center w-10/12 '>
+                <div className='flex lg:flex-row xs:flex-col gap-2 justify-around items-center lg:w-10/12 '>
                     {
                         perks.map((text) => {
-                            return <PerkElement text={text} />
+                            return <PerkElement circleColor='black' textColor='#090A18' text={text} />
                         })
                     }
                 </div>
