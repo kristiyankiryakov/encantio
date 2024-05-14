@@ -12,7 +12,7 @@ import FAQ from "./landing/FAQ/Index"
 function App() {
 
   return (
-    <div className='ROOT h-full w-full' >
+    <div className='ROOT h-full w-full font-custom1' >
       <div className='bg-[#090A18]' >
         < Header />
         <Main />
@@ -36,7 +36,7 @@ function App() {
       <div className='bg-gray-100' >
         <DownSeparator backgroundColor="gray-100" />
       </div>
-      
+
       <Footer />
 
 

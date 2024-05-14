@@ -13,13 +13,13 @@ function Index() {
 
                 </div>
 
-                <div className='card-container flex w-full justify-between items-center' >
-                    {
-                        [1, 2, 3].map(() => {
-                            return <ProductCard />
-                        })
-                    }
+                <div className='card-container flex flex-wrap w-full justify-between items-start gap-2'>
+                    {[1, 2, 3].map((card) => {
+                        return <ProductCard key={card} />;
+                    })}
                 </div>
+
+
 
                 <BottomCard />
 
