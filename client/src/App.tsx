@@ -36,7 +36,7 @@ function App() {
       <div className='bg-gray-100' >
         <DownSeparator backgroundColor="gray-100" />
       </div>
-      
+
       <Footer />
 
 

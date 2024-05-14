@@ -28,7 +28,7 @@ const Index = (props: Props) => {
                 </div>
             </div>
 
-            <div className='Links border-b-[1px] border-[#51535D] w-10/12 mx-auto flex justify-between pt-20 pb-10 text-white' >
+            <div className='Links border-b-[1px] border-[#51535D] w-10/12 mx-auto flex flex-col md:flex-row justify-between pt-20 pb-10 text-white' >
 
                 <div className='social-container flex gap-6 justify-between w-fit' >
                     <div>
