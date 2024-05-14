@@ -1,6 +1,4 @@
-import React from 'react'
-import SeeMoreBtn from './SeeMoreBtn'
-import PerkElement from '../Footer/PerkElement'
+import PerkElement from '../Footer/PerkElement';
 
 const perks = ["Бърза доставка с Еконт", "Дълъг живот на продуктите", "Отстъпки за комплекти"];
 

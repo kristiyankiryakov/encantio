@@ -1,5 +1,4 @@
 import Navigation from './Navigation'
-import SeeMoreBtn from './SeeMoreBtn'
 import Text from './Text'
 
 function Index() {

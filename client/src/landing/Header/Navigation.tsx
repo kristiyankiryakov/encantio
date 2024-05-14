@@ -1,12 +1,11 @@
-import CartButton from "../../CartButton"
-import OrderNowNavBtn from "./OrderNowNavBtn"
 import {
     TEDropdown,
-    TEDropdownToggle,
-    TEDropdownMenu,
     TEDropdownItem,
-    TERipple,
+    TEDropdownMenu,
+    TEDropdownToggle
 } from "tw-elements-react";
+import CartButton from "../../CartButton";
+import OrderNowNavBtn from "./OrderNowNavBtn";
 
 function Navigation() {
 
