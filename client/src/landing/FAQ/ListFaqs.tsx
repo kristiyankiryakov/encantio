@@ -26,7 +26,7 @@ const faqs = [
 
 const ListFaqs = () => {
 
-    const [activeElement, setActiveElement] = useState("q1");
+    const [activeElement, setActiveElement] = useState("");
 
     return (<>
         {
