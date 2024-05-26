@@ -17,7 +17,6 @@ const SingleFaq = ({ question, answer, faqKey, activeElement, setActiveElement }
             setActiveElement(value);
         }
     };
-    console.log(activeElement);
 
     return (
         <div className="rounded-t-lg border-b-[1px] border-neutral-300 bg-gray-100 xs:w-11/12 sm:w-6/12 mx-auto">
