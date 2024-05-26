@@ -5,10 +5,10 @@ const perks = ["Бърза доставка с Еконт", "Дълъг живо
 
 function Text() {
     return (
-        <div className="w-full bg-header-background z-20 bg-center min-h-[35rem] bg-cover relative grid place-items-top mt-40">
+        <div className="w-full bg-header-background z-20 bg-center xs:min-h-[25rem] xl:min-h-[35rem] bg-cover relative grid place-items-top xs:mt-20 xl:mt-40">
 
-            <div className='z-20 flex flex-col text-white/90 items-center gap-y-14 justify-end' >
-                <div className='flex flex-col items-center gap-2 absolute -top-16 xs:text-3xl' >
+            <div className='z-20 flex flex-col text-white/90 items-center xl:gap-y-14 justify-end' >
+                <div className='flex flex-col items-center gap-2 absolute -top-16 xs:text-2xl sm:text-3xl' >
                     <h1 className='font-bold 2xl:text-5xl' >Трансформирай твоето</h1>
                     <h1 className='2xl:text-4xl' ><span className='font-bold 2xl:text-5xl '  >гейминг изживяване</span>  с нови</h1>
                     <h1 className='2xl:text-4xl' >крачета за мишката ти</h1>
@@ -37,12 +37,3 @@ function Text() {
 }
 
 export default Text
-
-// <div className='z-20 select-none bg-header-background bg-no-repeat bg-center bg-cover bg-opacity-5 bg-[#090A18] relative'>
-//     <div className='flex flex-col text-white text-4xl items-center gap-2 pb-52' >
-//         <h1>Трансформирай твоето</h1>
-//         <h1>гейминг изживяване с нови</h1>
-//         <h1>крачета за мишката ти</h1>
-//     </div>
-{/* <div className="absolute inset-0 bg-black opacity-60"></div> */ }
-// </div>

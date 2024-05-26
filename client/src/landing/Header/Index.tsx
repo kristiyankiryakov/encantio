@@ -6,8 +6,6 @@ function Index() {
         <div className='HEADER relative bg-[#090A18] text-white text-opacity-90'>
             < Navigation />
             <Text />
-      
-            {/* <Circle /> */}
         </div>
     )
 }
