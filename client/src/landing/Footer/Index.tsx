@@ -5,7 +5,7 @@ import LinkedIn from "../../assets/LinkedIn.png"
 import PhoneIcon from "../../assets/Phone.png";
 import MailIcon from "../../assets/Mail.png"
 
-const perks = ["Бърза доставка с Еконт", "Дълъг живот на продуктите", "Отстъпки за комплекти"];
+const perks = ["Бърза доставка с Еконт", "Дълъdг живот на продуктите", "Отстъпки за комплекти"];
 
 const Index = () => {
     return (
