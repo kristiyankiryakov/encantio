@@ -20,7 +20,7 @@ const SingleFaq = ({ question, answer, faqKey, activeElement, setActiveElement }
 
 
     return (
-        <div className="rounded-t-lg border-b-[1px] border-neutral-300 bg-gray-100 dark:border-neutral-600 dark:bg-neutral-800 w-6/12 mx-auto">
+        <div className="rounded-t-lg border-b-[1px] border-neutral-300 bg-gray-100 dark:border-neutral-600 dark:bg-neutral-800 xs:w-11/12 sm:w-6/12 mx-auto">
             <h2 className="mb-0" id="headingOne">
                 <button
                     className={`${activeElement === faqKey &&

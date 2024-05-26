@@ -1,4 +1,3 @@
-import React from 'react'
 import feet from "../../assets/feet-image.png";
 import stars from "../../assets/stars.png";
 import mouse from "../../assets/mouse-image.png";
@@ -6,7 +5,7 @@ type Props = {}
 
 function ProductCard({ }: Props) {
     return (
-        <div className='z-20 flex flex-col flex-wrap gap-10 w-[30%] xs:p-1 md:p-2 xl:p-4 rounded-md border border-1 border-gray-200/20  bg-cardBackground relative  xs:text-xs sm:text-sm'>
+        <div className='z-20 flex flex-col flex-wrap gap-10 w-[30%] xs:min-w-[20rem] md:min-w-[10rem] xs:p-6 xl:p-8 rounded-md border border-1 border-gray-200/20  bg-cardBackground relative xs:text-xs sm:text-sm'>
 
             <div className='Feet image select-none w-6/12 z-20'>
                 <img className='w-full' src={feet} alt="mouse-feet" />
@@ -14,12 +13,12 @@ function ProductCard({ }: Props) {
 
             <div className='flex items-center gap-5'>
                 <div><img src={stars} alt="review-starts" /></div>
-                <div className='text-white'>4.7</div>
+                <div className='text-white text-base'>4.7</div>
             </div>
 
-            <div className='flex flex-col gap-5'>
+            <div className='flex flex-col xs:gap-2 xl:gap-5'>
 
-                <div className='product-title text-white font-medium xs:text-base sm:text-base md:text-base xl:text-xl 2xl:text-2xl tracking-wider'>
+                <div className='product-title text-white font-medium xs:text-2xl tracking-wider'>
                     <p>Logitech G Pro X</p>
                 </div>
 
@@ -41,15 +40,16 @@ function ProductCard({ }: Props) {
 
                 <div className='bg-gray-700 w-full h-[0.065rem]' >&nbsp;</div>
 
-                <button className='px-6 py-4 bg-[#2e2f3b] border border-1 border-electricGreen rounded-md text-white font-medium' > Поръчай сега</button>
+                <button className='xl:px-6 xl:py-4 xs:px-4 xs:py-2 bg-[#2e2f3b] border border-1 border-electricGreen rounded-md text-white font-medium' > Поръчай сега</button>
 
             </div>
 
-            <div className='absolute -right-5 z-20 xs:w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[7rem] xl:w-[8rem] 2xl:w-[10rem]' >
+            <div className='absolute -top-0 xs:h-[6rem] xs:w-[6rem] md:h-[5rem] md:w-[5rem] lg:h-[7rem] lg:w-[7rem] xl:h-[10rem] xl:w-[10rem] left-[45%] z-0 rounded-full bg-radial-gradient-product opacity-20' ></div>
+
+            <div className='absolute -right-5 xs:top-5 xl:top-10 z-20 xs:w-[8rem] md:w-[7rem] xl:w-[10rem]' >
                 <img className='w-full' src={mouse} alt="mouse" />
             </div>
 
-            {/* <div className='absolute top-0 h-[10rem] w-[10rem] left-44 z-0 rounded-full bg-radial-gradient-product opacity-15' ></div> */}
 
         </div>
 

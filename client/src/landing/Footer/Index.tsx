@@ -15,7 +15,7 @@ const Index = (props: Props) => {
         <div className='bg-[#090A18]' >
 
             <div className='Card bg-electricGreen w-10/12 rounded-xl mx-auto flex flex-col justify-between items-center py-20 gap-20' >
-                <p className='text-[#090A18] text-center text-6xl font-bold w-10/12 text-pretty tracking' >Постигнете повече комфорт<br /> и точност с нови крачета за<br /> мишката си</p>
+                <p className='text-[#090A18] text-center xl:text-6xl font-bold w-10/12 text-pretty tracking' >Постигнете повече комфорт<br /> и точност с нови крачета за<br /> мишката си</p>
 
                 <button className='text-white px-10 py-4 text-xl bg-[#090A18] w-fit rounded-md' >Разгледайте моделите</button>
 
@@ -28,7 +28,7 @@ const Index = (props: Props) => {
                 </div>
             </div>
 
-            <div className='Links border-b-[1px] border-[#51535D] w-10/12 mx-auto flex flex-col md:flex-row justify-between pt-20 pb-10 text-white' >
+            <div className='Links border-b-[1px] border-[#51535D] w-10/12 mx-auto flex flex-col xs:gap-3 md:flex-row xs:items-center sm:items-start justify-between pt-20 pb-10 text-white' >
 
                 <div className='social-container flex gap-6 justify-between w-fit' >
                     <div>
@@ -43,7 +43,7 @@ const Index = (props: Props) => {
                 </div>
 
                 <div className='contact-container gap-8 flex justify-between w-fit' >
-                    <div className='phone flex gap-2' >
+                    <div className='phone flex gap-2 items-center' >
                         <div>
                             <img src={PhoneIcon} alt="phone-icon" />
                         </div>
@@ -51,7 +51,7 @@ const Index = (props: Props) => {
                         <p>088888888</p>
                     </div>
 
-                    <div className='mail flex gap-2' >
+                    <div className='mail flex gap-2 items-center' >
                         <div>
                             <img src={MailIcon} alt="mail-icon" />
                         </div>

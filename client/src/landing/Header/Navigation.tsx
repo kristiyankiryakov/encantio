@@ -5,7 +5,6 @@ import {
     TEDropdownToggle,
     TEDropdownMenu,
     TEDropdownItem,
-    TERipple,
 } from "tw-elements-react";
 
 function Navigation() {
@@ -16,9 +15,9 @@ function Navigation() {
 
     return (
         <div className='p-4 bg-[#090A18] xs:text-xs sm:text-sm md:text-lg'>
-            <nav className='p-3 NAVIGATION  bg-[#090A18] border-[1px] border-white/20 border-opacity-5 rounded-md flex items-center justify-between xs:w-10/12 md:w-11/12 lg:w-10/12 xl:w-7/12 2xl:w-7/12 mx-auto relative z-10'>
+            <nav className='p-3 NAVIGATION  bg-[#090A18] rounded-md flex items-center justify-between xs:w-12/12 md:w-11/12 lg:w-10/12 xl:w-7/12 2xl:w-7/12 mx-auto relative z-10'>
 
-                <div className='LOGO'>ENACNTIO</div>
+                <div className='LOGO xs:text-2xl'>ENACNTIO</div>
 
                 <div className='group-buttons md:flex 2xl:gap-10 xs:hidden gap-3'>
                     {pageButtons.map((text) => <button className="" >{text}</button>)}
