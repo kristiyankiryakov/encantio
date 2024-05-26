@@ -1,4 +1,3 @@
-import React from 'react'
 import PerkElement from './PerkElement';
 import Twitter from "../../assets/Twitter.png"
 import Facebook from "../../assets/Facebook.png"
@@ -6,11 +5,9 @@ import LinkedIn from "../../assets/LinkedIn.png"
 import PhoneIcon from "../../assets/Phone.png";
 import MailIcon from "../../assets/Mail.png"
 
-type Props = {}
-
 const perks = ["Бърза доставка с Еконт", "Дълъг живот на продуктите", "Отстъпки за комплекти"];
 
-const Index = (props: Props) => {
+const Index = () => {
     return (
         <div className='bg-[#090A18]' >
 

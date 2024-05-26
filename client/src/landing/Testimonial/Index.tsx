@@ -1,9 +1,7 @@
 import Cursor from "../../assets/cursor.png";
 import Testimonial from "../../assets/testimonail.png";
 
-type Props = {}
-
-const Index = (props: Props) => {
+const Index = () => {
     return (
 
         <div className='bg-[#090A18] pb-20' >

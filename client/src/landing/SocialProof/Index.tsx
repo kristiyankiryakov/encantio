@@ -1,9 +1,6 @@
-import React from 'react'
 import Stars from "../../assets/stars.png"
 
-type Props = {}
-
-const Index = (props: Props) => {
+const Index = () => {
     return (
         <main>
             <section className='bg-gray-100'>

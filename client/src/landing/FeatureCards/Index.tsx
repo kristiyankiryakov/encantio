@@ -6,9 +6,7 @@ import perkText from "./Text.tsx";
 import comfortGrid from "../../assets/comfort-grid.png";
 import divGrid from "../../assets/div-grid.png";
 
-type Props = {};
-
-const Index = (props: Props) => {
+const Index = () => {
   return (
     <main>
 
@@ -19,7 +17,7 @@ const Index = (props: Props) => {
         <div className='perks-container flex xl:flex-row justify-around mt-10'>
           <Perk icon={star} heading={perkText.qualityText.heading} text={perkText.qualityText.subHeading} />
           <Perk icon={square} heading={perkText.selectionText.heading} text={perkText.selectionText.subHeading} />
-          <Perk icon={lightning} heading={perkText.easeText.heading} text={perkText.easeText.subHeading} />
+          <Perk icon={lightning} heading={perkText.easeText.heading} text={perkText.easeText.subHeading} />``
         </div>
 
         <h2 className="text-[#090A18] pt-24 text-4xl text-center font-medium mb-10">Открийте разликата с [име на марка]</h2>
