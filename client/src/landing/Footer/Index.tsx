@@ -1,9 +1,9 @@
-import Facebook from "../../assets/Facebook.png";
-import LinkedIn from "../../assets/LinkedIn.png";
-import MailIcon from "../../assets/Mail.png";
-import PhoneIcon from "../../assets/Phone.png";
-import Twitter from "../../assets/Twitter.png";
 import PerkElement from './PerkElement';
+import Twitter from "../../assets/Twitter.png"
+import Facebook from "../../assets/Facebook.png"
+import LinkedIn from "../../assets/LinkedIn.png"
+import PhoneIcon from "../../assets/Phone.png";
+import MailIcon from "../../assets/Mail.png"
 
 const perks = ["Бърза доставка с Еконт", "Дълъг живот на продуктите", "Отстъпки за комплекти"];
 

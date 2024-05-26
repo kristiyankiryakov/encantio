@@ -1,4 +1,3 @@
-
 type Props = {
     color: string
 }
