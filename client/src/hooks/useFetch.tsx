@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import api from '../api';
+import { AxiosError } from 'axios';
 
 
 
@@ -14,7 +15,7 @@ const useFetch = <T,>(url: string, method: string) => {
                 const response = await api({ url, method });
                 setData(response.data);
             } catch (error) {
-                error instanceof Error && setErrorMsg(error.message);
+                error instanceof AxiosError && setErrorMsg(error?.response?.data);
             }
         })();
     }, [url, method]);

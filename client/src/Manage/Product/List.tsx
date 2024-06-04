@@ -5,7 +5,7 @@ import { Table } from "flowbite-react";
 const List = () => {
 
     const { data: products, errorMsg } = useFetch<Product[]>('/products', 'GET');
-
+  
     return (<>
 
         {errorMsg && <p className="text-center text-2xl text-danger" >{errorMsg}</p>}
