@@ -1,9 +1,9 @@
 import Login from "../Login/Login";
-import Manage from "../Manage/Index";
+import Dashboard from "../Manage/Dashboard";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
-// import { useAuth } from "../provider/authProvider";
 import Landing from "../landing/Index"
+import Products from "../Manage/Product/Index";
 
 
 const Routes = () => {
@@ -25,7 +25,11 @@ const Routes = () => {
             children: [
                 {
                     path: "/manage",
-                    element: <Manage />
+                    element: <Dashboard />
+                },
+                {
+                    path: '/manage/products',
+                    element: <Products />
                 }
             ]
         }
