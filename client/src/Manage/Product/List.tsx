@@ -1,11 +1,13 @@
 import { Product } from './ProductType';
 import useFetch from '../../hooks/useFetch';
 import { Table } from "flowbite-react";
+import { useNavigate } from 'react-router-dom';
 
 const List = () => {
 
     const { data: products, errorMsg } = useFetch<Product[]>('/products', 'GET');
-  
+    const navigate = useNavigate();
+
     return (<>
 
         {errorMsg && <p className="text-center text-2xl text-danger" >{errorMsg}</p>}
@@ -31,8 +33,8 @@ const List = () => {
                                 <Table.Cell>{product.stock}</Table.Cell>
                                 <Table.Cell >{product.featured ? "Yes" : "No"}</Table.Cell>
                                 <Table.Cell>$2999</Table.Cell>
-                                <Table.Cell>
-                                    <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                                <Table.Cell >
+                                    <a onClick={(() => navigate(`/manage/products/${product.id}`))} className="font-medium text-cyan-600 hover:underline dark:text-cyan-500 cursor-pointer">
                                         Edit
                                     </a>
                                 </Table.Cell>
@@ -42,7 +44,7 @@ const List = () => {
 
                 </Table.Body>
             </Table>
-        </div>
+        </div >
     </>
     )
 }

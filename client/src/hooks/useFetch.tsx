@@ -3,7 +3,6 @@ import api from '../api';
 import { AxiosError } from 'axios';
 
 
-
 const useFetch = <T,>(url: string, method: string) => {
     const [data, setData] = useState<T | null>(null);
     const [errorMsg, setErrorMsg] = useState('');
