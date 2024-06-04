@@ -1,6 +1,6 @@
 export const customTheme = {
     "root": {
-        "base": "h-screen",
+        "base": "min-h-screen",
         "collapsed": {
             "on": "w-16",
             "off": "w-64"

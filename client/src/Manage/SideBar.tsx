@@ -44,7 +44,7 @@ function SideBar({ }: Props) {
                         <Sidebar.Item className="cursor-pointer">Shipping</Sidebar.Item>
                     </Sidebar.Collapse>
                     <Sidebar.Item className="cursor-pointer" icon={HiInbox}>
-                        Manage reviews
+                        Reviews
                     </Sidebar.Item>
                     <Sidebar.Item className="cursor-pointer" icon={HiOutlineGift}>
                         Orders
