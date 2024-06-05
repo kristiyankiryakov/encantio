@@ -8,7 +8,7 @@ export const ProtectedRoute = () => {
         return <Navigate to="/" />;
     }
     return <>
-        <div className="flex">
+        <div className="flex h-full">
             <SideBar />
 
             <Outlet />
