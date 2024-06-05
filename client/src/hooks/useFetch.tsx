@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import api from '../api';
 import { AxiosError } from 'axios';
 
@@ -6,20 +6,32 @@ import { AxiosError } from 'axios';
 const useFetch = <T,>(url: string, method: string) => {
     const [data, setData] = useState<T | null>(null);
     const [errorMsg, setErrorMsg] = useState('');
+    const [invalidate, setInvalidate] = useState(false);
 
+    const invalidateFetch = useCallback(() => {
+        setInvalidate(prev => !prev);
+    }, []);
 
     useEffect(() => {
         (async () => {
             try {
-                const response = await api({ url, method });
+                const config = {
+                    url,
+                    method,
+
+                };
+
+                const response = await api(config);
                 setData(response.data);
             } catch (error) {
-                error instanceof AxiosError && setErrorMsg(error?.response?.data);
+                if (error instanceof AxiosError) {
+                    setErrorMsg(error?.response?.data || error.message);
+                }
             }
         })();
-    }, [url, method]);
+    }, [url, method, invalidate]);
 
-    return { data, errorMsg };
+    return { data, errorMsg, invalidateFetch };
 
 }
 

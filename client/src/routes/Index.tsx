@@ -3,7 +3,7 @@ import Dashboard from "../Manage/Dashboard";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 import Landing from "../landing/Index"
-import Products from "../Manage/Product/Index";
+import Products from "../Manage/Product/Index"
 import Single from "../Manage/Product/Single";
 
 
