@@ -39,6 +39,9 @@ const ProductTable = ({ products, filter, currentPage, setOpenModal, errorMsg, s
             <div className=" w-10/12 mx-auto">
                 <Table striped>
                     <Table.Head>
+                        <Table.HeadCell className="p-4">
+                            ID
+                        </Table.HeadCell>
                         <Table.HeadCell>Product name</Table.HeadCell>
                         <Table.HeadCell>Stock</Table.HeadCell>
                         <Table.HeadCell>Featured</Table.HeadCell>
@@ -54,6 +57,9 @@ const ProductTable = ({ products, filter, currentPage, setOpenModal, errorMsg, s
                         {currentProducts && currentProducts.map((product) => {
                             return (
                                 <Table.Row key={product.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                                    <Table.Cell className="p-4">
+                                        {product.id}
+                                    </Table.Cell>
                                     <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                                         {product.name}
                                     </Table.Cell>
