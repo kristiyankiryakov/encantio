@@ -35,6 +35,10 @@ const Routes = () => {
                 {
                     path: 'products/:id',
                     element: <Single />
+                },
+                {
+                    path: 'products/create',
+                    element: <Single /> 
                 }
             ]
         }

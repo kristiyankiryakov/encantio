@@ -3,10 +3,11 @@ import api from '../api';
 import { AxiosError } from 'axios';
 
 
-const useFetch = <T,>(url: string, method: string) => {
+const useFetch = <T,>(url: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE') => {
     const [data, setData] = useState<T | null>(null);
     const [errorMsg, setErrorMsg] = useState('');
     const [invalidate, setInvalidate] = useState(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const invalidateFetch = useCallback(() => {
         setInvalidate(prev => !prev);
@@ -27,11 +28,13 @@ const useFetch = <T,>(url: string, method: string) => {
                 if (error instanceof AxiosError) {
                     setErrorMsg(error?.response?.data || error.message);
                 }
+            } finally {
+                setLoading(false);
             }
         })();
     }, [url, method, invalidate]);
 
-    return { data, errorMsg, invalidateFetch };
+    return { data, errorMsg, invalidateFetch, loading };
 
 }
 
