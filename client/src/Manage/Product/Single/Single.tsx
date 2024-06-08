@@ -1,21 +1,12 @@
 import { Button, FileInput, FloatingLabel, Label, Radio } from 'flowbite-react';
-import { useMemo, useRef, useState } from 'react';
-import { v4 as uuid } from 'uuid';
-import { storage } from '../../../firebase';
-import useProduct from '../../../hooks/useProduct';
-import { HiTrash } from "react-icons/hi";
 
-import {
-    deleteObject,
-    getDownloadURL,
-    ref,
-    ref as storageRef,
-    uploadBytesResumable,
-} from "firebase/storage";
-import api from '../../../api';
+import { HiTrash } from "react-icons/hi";
+import ProductHelper from './HelperService';
+
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import { Product } from '../ProductType';
+import useManageProduct from '../../../hooks/useManageProduct';
+import { DefaultProduct } from '../ProductType';
 
 
 type Props = {}
@@ -23,148 +14,9 @@ type Props = {}
 
 const Single = (props: Props) => {
 
-    const { data: product, setData: setProduct, isProduct } = useProduct();
-
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-
-        setProduct(prevState => ({
-            ...prevState,
-            [name]: name === 'featured' ? value === 'true' ? true : false : value
-        }));
-    };
-
-
-    const [productImages, setProductImages] = useState<File[] | null>(null);
-    const [thumbnail, setThumbnail] = useState<File | null>(null);
-
-    const [draggable, setDraggable] = useState(-1);
-    const dragImage = useRef(0);
-    const draggedOverImage = useRef(0);
-
-    const currentImages = useMemo(() => [...(product.images ?? []), ...(productImages ?? [])], [product.images, productImages]);
-
+    const { product, setProduct, productImages, setProductImages, thumbnail, setThumbnail, draggable, setDraggable, dragImage, draggedOverImage, currentImages } = useManageProduct();
+    const helper = new ProductHelper(product, setProduct, productImages, setProductImages, setThumbnail, dragImage, draggedOverImage);
     const navigate = useNavigate();
-
-    const uploadFiles = async (images: File[] | null, isThumbnail: boolean) => {
-        if (!images) return;
-
-        const urls: string[] = [];
-
-        await Promise.all(images.map(async (file) => {
-            try {
-                const imageRef = storageRef(storage, `products/${uuid()}`);
-                const snapshot = await uploadBytesResumable(imageRef, file);
-
-                const url = await getDownloadURL(snapshot.ref);
-
-                if (isThumbnail) {
-                    setProduct((prev) => ({ ...prev, thumbnail: url }))
-                    setThumbnail(null);
-                } else {
-                    urls.push(url);
-                }
-
-            } catch (error) {
-                console.log('Error uploading image:', error);
-            }
-        }));
-
-        if (!isThumbnail) {
-            setProduct((prev) => prev.images ? ({ ...prev, images: [...prev.images, ...urls] }) : (({ ...prev, images: urls })));
-            setProductImages(null);
-        }
-
-    };
-
-    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, isThumbnail: boolean) => {
-        const files = e.target.files;
-        if (files) {
-            isThumbnail ? setThumbnail(files[0]) : setProductImages(Array.from(files));
-        }
-    };
-
-    const handleSort = (isNew: boolean) => {
-        if (product.images && productImages) {
-            return toast.error('Save all newly added images, so you can make changes in the sequence.', { autoClose: 3000, theme: "dark" })
-        }
-
-        if (isNew) {
-            if (!productImages) return;
-            const cloneImages = [...productImages];
-            const temp = cloneImages[dragImage.current];
-            cloneImages[dragImage.current] = cloneImages[draggedOverImage.current]
-            cloneImages[draggedOverImage.current] = temp;
-            setProductImages(cloneImages);
-        } else {
-            if (!product.images) return;
-            const cloneImages = [...product.images];
-            const temp = cloneImages[dragImage.current];
-            cloneImages[dragImage.current] = cloneImages[draggedOverImage.current]
-            cloneImages[draggedOverImage.current] = temp;
-            setProduct((prev) => ({ ...prev, images: cloneImages }));
-        }
-
-    }
-
-    const createProduct = async () => {
-        try {
-            const config = {
-                method: "POST",
-                data: product
-            };
-
-            const response = await api('/products', config)
-            navigate(`/manage/products/${response.data.id}`)
-            toast.success('Save product successfully!', { autoClose: 1000, theme: "dark" });
-
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
-    const updateProduct = async (data: Product) => {
-        try {
-            const config = {
-                method: "PUT",
-                data
-            };
-
-            const response = await api(`/products/${data.id}`, config)
-            return response.data;
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
-    const handleImageDeletion = async (isSaved: boolean, index: number) => {
-        if (isSaved && isProduct(product) && product.images) {
-            try {
-                const currentSavedImages = product.images.filter((_, currIndex) => currIndex != index);
-                const imageToDelete = product.images[index];
-
-                // Delete from Firebase Storage
-                if (imageToDelete.startsWith('gs://') || imageToDelete.startsWith('http')) {
-                    const imageRef = ref(storage, imageToDelete);
-                    await deleteObject(imageRef);
-                }
-
-                const savedProduct = await updateProduct({ ...product, images: currentSavedImages });
-                setProduct(savedProduct);
-                toast.success('Image deleted successfully!', { autoClose: 1000, theme: 'dark' });
-
-            } catch (err) {
-                console.error('Error deleting image:', err);
-            }
-        }
-
-        if (productImages) {
-            const filtered = productImages.filter((_, index) => index != index);
-
-            setProductImages(filtered.length === 0 ? null : filtered);
-        }
-    }
 
 
     return (
@@ -182,7 +34,7 @@ const Single = (props: Props) => {
                             inputMode='text'
                             name='name'
                             value={product.name}
-                            onChange={handleChange}
+                            onChange={(e) => helper.handleChange(e)}
                         // helperText="Remember, contributions to this topic should follow our Community Guidelines."
                         />
 
@@ -191,7 +43,7 @@ const Single = (props: Props) => {
                             <textarea
                                 name={'description'}
                                 value={product.description}
-                                onChange={handleChange}
+                                onChange={(e) => helper.handleChange(e)}
                                 placeholder='Enter the description of the product.' className='w-full mt-1 p-2 border border-gray-500 rounded-md bg-[#374151] focus:outline-none' rows={5}></textarea>
                         </div>
 
@@ -207,7 +59,7 @@ const Single = (props: Props) => {
                                         className='cursor-pointer'
                                         value={'true'}
                                         checked={product.featured === true}
-                                        onChange={handleChange}
+                                        onChange={(e) => helper.handleChange(e)}
                                     />
                                     <Label className='cursor-pointer' htmlFor="featured">Featured</Label>
                                 </div>
@@ -216,7 +68,7 @@ const Single = (props: Props) => {
                                     <Radio className='cursor-pointer' id="not-featured" name="featured"
                                         value={'false'}
                                         checked={product.featured === false}
-                                        onChange={handleChange}
+                                        onChange={(e) => helper.handleChange(e)}
                                     />
                                     <Label className='cursor-pointer' htmlFor="not-featured">Not featured</Label>
                                 </div>
@@ -226,14 +78,14 @@ const Single = (props: Props) => {
 
                                 <div>
                                     <label className='block text-gray-300'>Stock</label>
-                                    <input name="stock" value={product.stock} onChange={handleChange} type='number' className='w-full mt-1 p-2 border bg-[#374151] border-gray-500 rounded-md' />
+                                    <input name="stock" value={product.stock} onChange={(e) => helper.handleChange(e)} type='number' className='w-full mt-1 p-2 border bg-[#374151] border-gray-500 rounded-md' />
                                 </div>
 
 
 
                                 <div>
                                     <label className='block text-gray-300'>Price</label>
-                                    <input name="price" value={product.price} onChange={handleChange} type='number' className='w-full mt-1 p-2 border bg-[#374151] border-gray-500 rounded-md' />
+                                    <input name="price" value={product.price} onChange={(e) => helper.handleChange(e)} type='number' className='w-full mt-1 p-2 border bg-[#374151] border-gray-500 rounded-md' />
                                 </div>
                             </div>
                         </div>
@@ -256,7 +108,7 @@ const Single = (props: Props) => {
                                             }}
                                             onDragEnter={() => draggedOverImage.current = index}
                                             onDragEnd={() => {
-                                                handleSort(!isImageSaved);
+                                                helper.handleSort(!isImageSaved);
                                                 setDraggable(-1);
                                             }}
                                             className={`${draggable === index ? 'opacity-50 transform scale-12 transition-transform duration-200' : ''} w-56 h-56 rounded-lg flex justify-center items-center`}
@@ -272,7 +124,8 @@ const Single = (props: Props) => {
 
                                         <div
                                             key={`product-icon-${index}`}
-                                            onClick={() => handleImageDeletion(isImageSaved, index)}
+                                            // product, productImages, isProduct, setProduct, setProductImages
+                                            onClick={() => helper.handleImageDeletion(isImageSaved, index,)}
                                             className='absolute top-1 -right-3 bg-gray-700 p-1 rounded-lg cursor-pointer'
                                         >
                                             <HiTrash size={26} />
@@ -299,12 +152,13 @@ const Single = (props: Props) => {
                                 <Label htmlFor="file-upload-helper-text" />
                             </div>
                             <FileInput
-                                onChange={(e) => handleImageUpload(e, false)} multiple
+                                // setProductImages
+                                onChange={(e) => helper.handleImageUpload(e, false, setThumbnail,)} multiple
                                 id="file-upload-helper-text" helperText="SVG, PNG, JPG or GIF (MAX. 800x400px)." />
                         </div>
 
                         <div className='flex w-full justify-end' >
-                            <Button disabled={!productImages} onClick={() => { uploadFiles(productImages, false); }}
+                            <Button disabled={!productImages} onClick={() => { helper.uploadFiles(productImages, false); }}
                                 color="success" className='dark:bg-success' >Save
                             </Button>
                         </div>
@@ -333,12 +187,13 @@ const Single = (props: Props) => {
                                     <Label htmlFor="file-upload-helper-text" />
                                 </div>
                                 <FileInput
-                                    onChange={(e) => handleImageUpload(e, true)}
+                                    //setProductImages
+                                    onChange={(e) => helper.handleImageUpload(e, true, setThumbnail,)}
                                     id="file-upload-helper-text" helperText="SVG, PNG, JPG or GIF (MAX. 800x400px)." />
                             </div>
 
                             <div className='flex justify-end w-full' >
-                                <Button disabled={!thumbnail} onClick={() => { thumbnail && uploadFiles([thumbnail], true); }}
+                                <Button disabled={!thumbnail} onClick={() => { thumbnail && helper.uploadFiles([thumbnail], true); }}
                                     color="success" className='dark:bg-success' >Save
                                 </Button>
                             </div>
@@ -352,7 +207,10 @@ const Single = (props: Props) => {
             <div className='flex justify-end mt-10 space-x-4'>
                 <Button
                     color="warning" className='dark:bg-warning' >Discard</Button>
-                <Button onClick={createProduct} color='gray' className='dark:bg-green-400 dark:text-white'
+                <Button onClick={() => {
+                    helper.createProduct(product as DefaultProduct).then((r) => navigate(`/manage/products/${r?.data.id}`));
+
+                }} color='gray' className='dark:bg-green-400 dark:text-white'
                 >Save Changes
                 </Button>
             </div>
