@@ -133,8 +133,6 @@ const Single = (props: Props) => {
 
             const response = await api(`/products/${data.id}`, config)
             return response.data;
-            toast.success('Product updated successfully!', { autoClose: 1000, theme: "dark" });
-
         } catch (err) {
             console.log(err)
         }
@@ -154,10 +152,17 @@ const Single = (props: Props) => {
 
                 const savedProduct = await updateProduct({ ...product, images: currentSavedImages });
                 setProduct(savedProduct);
+                toast.success('Image deleted successfully!', { autoClose: 1000, theme: 'dark' });
 
             } catch (err) {
                 console.error('Error deleting image:', err);
             }
+        }
+
+        if (productImages) {
+            const filtered = productImages.filter((_, index) => index != index);
+
+            setProductImages(filtered.length === 0 ? null : filtered);
         }
     }
 
