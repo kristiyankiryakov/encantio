@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import useAuthStore from "../stores/AuthStore";
 import SideBar from "../Manage/SideBar";
+import "react-toastify/dist/ReactToastify.css";
 
 export const ProtectedRoute = () => {
     const token = useAuthStore(state => state.token);
@@ -12,6 +13,7 @@ export const ProtectedRoute = () => {
             <SideBar />
 
             <Outlet />
+
         </div></>
 
 };

@@ -1,5 +1,5 @@
 import { Pagination, Table } from "flowbite-react";
-import { Product } from "./ProductType";
+import { Product } from "../ProductType";
 import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 
@@ -20,16 +20,13 @@ type Props = {
 
 }
 
-const ProductTable = ({ products, filter, currentPage, setOpenModal, errorMsg, setCurrentPage, productPerPage }: Props) => {
+const ProductTable = ({ products, filter, currentPage, setOpenModal, errorMsg, setCurrentPage }: Props) => {
 
     const navigate = useNavigate();
 
 
-    const indexOfLastProduct = currentPage * productPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productPerPage;
-
     const currentProducts = useMemo(() => {
-        return products && products.slice(indexOfFirstProduct, indexOfLastProduct).filter((product) => product.name.includes(filter));
+        return products && products.filter((product) => product.name.includes(filter));
     }, [products, filter, currentPage]);
 
     return (

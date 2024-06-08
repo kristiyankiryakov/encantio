@@ -59,6 +59,7 @@ public class ProductServiceImpl implements ProductService {
                     product.setPrice(newProduct.getPrice());
                     product.setStock(newProduct.getStock());
                     product.setFeatured(newProduct.getFeatured());
+                    product.setThumbnail(newProduct.getThumbnail());
                     return productRepository.save(product);
                 })
                 .orElseGet(() -> {
