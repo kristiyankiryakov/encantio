@@ -30,6 +30,8 @@ public class Product extends BaseEntity {
     @Column(nullable = false)
     private int stock;
 
+    private String thumbnail = null;
+
     @NotNull
     @DecimalMin(value = "0.00", inclusive = true, message = "Total must be greater than or equal to 0")
     private BigDecimal price;

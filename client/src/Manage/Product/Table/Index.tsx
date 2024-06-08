@@ -1,15 +1,17 @@
 import { FloatingLabel } from "flowbite-react";
 import { useState } from 'react';
-import useFetch from '../../hooks/useFetch';
+import useFetch from '../../../hooks/useFetch';
 import ProductModal from './ProductModal';
 import ProductTable from './ProductTable';
-import { Product } from './ProductType';
+import { Product } from '../ProductType';
 
 const Index = () => {
 
-    const { data: products, errorMsg, invalidateFetch } = useFetch<Product[]>('/products', 'GET');
     const [productPerPage] = useState(13);
     const [currentPage, setCurrentPage] = useState(1);
+
+    const { data: products, errorMsg, invalidateFetch } = useFetch<Product[]>(`/products?pageNumber=${currentPage - 1}&pageSize=${productPerPage}`, 'GET');
+    0
     const [filter, setFilter] = useState("");
     const [openModal, setOpenModal] = useState<{ show: boolean, product: null | Product }>({ show: false, product: null });
 

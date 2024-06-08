@@ -1,8 +1,8 @@
 import { AxiosError } from "axios";
 import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import api from "../../api";
-import { Product } from "./ProductType";
+import api from "../../../api";
+import { Product } from "../ProductType";
 
 
 type Props = {

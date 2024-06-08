@@ -5,7 +5,8 @@ export type Product = {
     description: string
     featured: boolean
     id: number
-    images: string[]
+    thumbnail: string | null
+    images: string[] | null
     name: string
     reviews: number[]
     stock: number
@@ -14,9 +15,10 @@ export type Product = {
 }
 
 export type DefaultProduct = {
+    thumbnail: string | null
     description: string
     featured: boolean
-    images: string[]
+    images: string[] | null
     name: string
     stock: number
     reviews: Review[] | []
