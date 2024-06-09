@@ -1,7 +1,5 @@
 import { ToastContainer } from 'react-toastify';
 import useProduct from '../../../hooks/useProduct';
-import useProductImages from '../../../hooks/useProductImages';
-import ImageHelper from './ImageHelper';
 import ProductDetails from './ProductDetails';
 import ProductImages from './ProductImages';
 import SaveOrDiscard from './SaveOrDiscard';
@@ -10,9 +8,7 @@ import Thumbnail from './Thumbnail';
 
 const Single = () => {
 
-    const { product, setProduct } = useProduct();
-    const { productImages, setProductImages, dragImage, draggedOverImage, thumbnail, setThumbnail } = useProductImages();
-    const imageHelper = new ImageHelper(product, setProduct, productImages, setProductImages, dragImage, setThumbnail, draggedOverImage);
+    const { product } = useProduct();
 
     return (
         <div className='w-full p-10'>
@@ -28,11 +24,11 @@ const Single = () => {
                     <ProductDetails />
 
 
-                    <ProductImages product={product} dragImage={dragImage} draggedOverImage={draggedOverImage} productImages={productImages} setProductImages={setProductImages} imageHelper={imageHelper} />
+                    <ProductImages />
 
                 </div>
 
-                <Thumbnail product={product} imageHelper={imageHelper} thumbnail={thumbnail} setThumbnail={setThumbnail} />
+                <Thumbnail />
 
 
             </div>

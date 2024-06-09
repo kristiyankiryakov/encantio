@@ -1,16 +1,21 @@
-import React from 'react'
-import { DefaultProduct, Product } from '../ProductType';
 import { Button, FileInput, Label } from 'flowbite-react';
-import ImageHelper from './ImageHelper';
+import { useState } from 'react';
+import useProductStore from '../../../stores/ProductStore';
+import { uploadFilesAndGetUrl } from '../services/ProductHelper';
 
-type Props = {
-    product: Product | DefaultProduct
-    thumbnail: File | null
-    setThumbnail: React.Dispatch<React.SetStateAction<File | null>>
-    imageHelper: ImageHelper
-}
+function Thumbnail() {
 
-function Thumbnail({ product, thumbnail, setThumbnail, imageHelper }: Props) {
+    const { product, setProduct } = useProductStore();
+    const [thumbnail, setThumbnail] = useState<File | null>(null);
+
+    const handleThumbnailUpload = async () => {
+        if (thumbnail) {
+            const [url] = await uploadFilesAndGetUrl([thumbnail]) as string[];
+            url && setProduct((prev) => ({ ...prev, thumbnail: url }));
+            setThumbnail(null);
+        }
+    }
+
     return (
         <div className='lg:col-span-1 space-y-6'>
 
@@ -35,20 +40,19 @@ function Thumbnail({ product, thumbnail, setThumbnail, imageHelper }: Props) {
                             <Label htmlFor="file-upload-helper-text" />
                         </div>
                         <FileInput
-                            //THUMBNAIL
                             onChange={(e) => setThumbnail(e.target.files && e.target.files[0])}
                             id="file-upload-helper-text" helperText="SVG, PNG, JPG or GIF (MAX. 800x400px)." />
                     </div>
 
                     <div className='flex justify-end w-full' >
-                        <Button disabled={!thumbnail} onClick={() => { thumbnail && imageHelper.uploadFiles([thumbnail], true); }}
+                        <Button disabled={!thumbnail} onClick={handleThumbnailUpload}
                             color="success" className='dark:bg-success' >Save
                         </Button>
                     </div>
 
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

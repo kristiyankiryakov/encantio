@@ -1,6 +1,6 @@
 import { Label, Radio } from "flowbite-react"
 import useProductStore from "../../../stores/ProductStore"
-import { handleChange } from "./ProductHelperService"
+import { handleChange } from "../services/ProductHelper"
 
 const ProductDetails = () => {
 

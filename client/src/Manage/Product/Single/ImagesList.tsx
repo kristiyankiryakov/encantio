@@ -1,22 +1,32 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { HiTrash } from "react-icons/hi";
-import { DefaultProduct, Product } from "../ProductType";
-import ImageHelper from "./ImageHelper";
+import useDraggable from "../../../hooks/useDraggable";
+import useProductStore from "../../../stores/ProductStore";
+import { handleImageDeletion, updateProduct } from "../services/ProductHelper";
+import { Product } from "../ProductType";
 
 type Props = {
-    product: Product | DefaultProduct
     productImages: File[] | null
-    dragImage: React.MutableRefObject<number>
-    draggedOverImage: React.MutableRefObject<number>
-    imageHelper: ImageHelper
+    setProductImages: (value: React.SetStateAction<File[] | null>) => void
 }
 
 const ImagesList = ({
-    product, productImages, dragImage, draggedOverImage, imageHelper
+    productImages, setProductImages
 }: Props) => {
 
+    const { product, setProduct } = useProductStore();
     const currentImages = useMemo(() => [...(product.images ?? []), ...(productImages ?? [])], [product.images, productImages]);
-    const [draggable, setDraggable] = useState(-1);
+    const { dragImage, draggable, draggedOverImage, handleSort, setDraggable } = useDraggable({ setProductImages, setProduct });
+
+    const handleDeletion = async (isImageSaved: boolean, index: number) => {
+        const result = await handleImageDeletion(isImageSaved, isImageSaved ? product.images as string[] : productImages as File[], index);
+        if (isImageSaved) {
+            const savedProduct = await updateProduct({ ...product, images: result } as Product);
+            setProduct(savedProduct);
+        } else {
+            setProductImages(result as File[] | null);
+        }
+    }
 
     return (
 
@@ -34,7 +44,7 @@ const ImagesList = ({
                             }}
                             onDragEnter={() => draggedOverImage.current = index}
                             onDragEnd={() => {
-                                imageHelper.handleSort(!isImageSaved);
+                                handleSort(Boolean(product.images && productImages), isImageSaved, currentImages)
                                 setDraggable(-1);
                             }}
                             className={`${draggable === index ? 'opacity-50 transform scale-12 transition-transform duration-200' : ''} w-56 h-56 rounded-lg flex justify-center items-center`}
@@ -51,7 +61,7 @@ const ImagesList = ({
                         <div
                             key={`product-icon-${index}`}
                             // product, productImages, isProduct, setProduct, setProductImages
-                            onClick={() => imageHelper.handleImageDeletion(isImageSaved, index,)}
+                            onClick={() => handleDeletion(isImageSaved, index)}
                             className='absolute top-1 -right-3 bg-gray-700 p-1 rounded-lg cursor-pointer'
                         >
                             <HiTrash size={26} />

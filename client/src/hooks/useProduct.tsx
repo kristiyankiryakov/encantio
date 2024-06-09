@@ -46,7 +46,7 @@ const useProduct = () => {
             setProduct(defaultProduct);
             setLoading(false);
         }
-    }, [id,]);
+    }, [id]);
 
     return { product, loading, errorMsg, setProduct, isProduct };
 };

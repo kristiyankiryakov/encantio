@@ -1,23 +1,24 @@
 import { Button, FileInput, Label } from 'flowbite-react';
-import { DefaultProduct, Product } from '../ProductType';
-import ImageHelper from './ImageHelper';
+import { useState } from 'react';
+import useProductStore from '../../../stores/ProductStore';
 import ImagesList from './ImagesList';
+import { uploadFilesAndGetUrl } from '../services/ProductHelper';
 
-type Props = {
-    product: Product | DefaultProduct
-    imageHelper: ImageHelper
-    productImages: File[] | null
-    dragImage: React.MutableRefObject<number>
-    draggedOverImage: React.MutableRefObject<number>
-    setProductImages: React.Dispatch<React.SetStateAction<File[] | null>>
-}
 
-const ProductImages = ({ product, productImages, dragImage, draggedOverImage, imageHelper, setProductImages }: Props) => {
+const ProductImages = () => {
+
+    const { setProduct } = useProductStore();
+    const [productImages, setProductImages] = useState<File[] | null>(null);
+    const handleProductImagesUpload = async () => {
+        const urls = await uploadFilesAndGetUrl(productImages) as string[];
+        setProduct((prev) => prev.images ? ({ ...prev, images: [...prev.images, ...urls] }) : (({ ...prev, images: urls })));
+        setProductImages(null);
+    }
 
     return (
         <div className='bg-[#1d2127] p-6 rounded-md shadow-md' >
             <h2 className='text-xl font-semibold mb-4 text-gray-300'>Product images</h2>
-            <ImagesList dragImage={dragImage} draggedOverImage={draggedOverImage} imageHelper={imageHelper} product={product} productImages={productImages} />
+            <ImagesList setProductImages={setProductImages} productImages={productImages} />
 
             <div className='my-3' >
                 <div>
@@ -29,11 +30,11 @@ const ProductImages = ({ product, productImages, dragImage, draggedOverImage, im
             </div>
 
             <div className='flex w-full justify-end' >
-                <Button disabled={!productImages} onClick={() => { imageHelper.uploadFiles(productImages, false); }}
+                <Button disabled={!productImages} onClick={handleProductImagesUpload}
                     color="success" className='dark:bg-success' >Save
                 </Button>
             </div>
-        </div>
+        </div >
     )
 }
 
