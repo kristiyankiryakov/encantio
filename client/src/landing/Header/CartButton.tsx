@@ -1,4 +1,4 @@
-import cartImage from "./assets/Cart.png";
+import cartImage from "../../assets/Cart.png"
 
 const CartButton = () => {
     return (

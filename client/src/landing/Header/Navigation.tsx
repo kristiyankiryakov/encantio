@@ -1,4 +1,5 @@
-import CartButton from "../../CartButton"
+
+import CartButton from "./CartButton";
 import OrderNowNavBtn from "./OrderNowNavBtn"
 import {
     TEDropdown,

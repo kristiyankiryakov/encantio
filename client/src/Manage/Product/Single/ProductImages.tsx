@@ -9,6 +9,7 @@ const ProductImages = () => {
 
     const { setProduct } = useProductStore();
     const [productImages, setProductImages] = useState<File[] | null>(null);
+    
     const handleProductImagesUpload = async () => {
         const urls = await uploadFilesAndGetUrl(productImages) as string[];
         setProduct((prev) => prev.images ? ({ ...prev, images: [...prev.images, ...urls] }) : (({ ...prev, images: urls })));
