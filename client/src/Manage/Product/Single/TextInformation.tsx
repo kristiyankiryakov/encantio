@@ -1,6 +1,6 @@
 import { FloatingLabel } from 'flowbite-react'
 import useProductStore from '../../../stores/ProductStore'
-import { handleChange } from '../services/ProductHelper'
+import { handleChange } from '../../services/ProductHelper'
 
 const TextInformation = () => {
 

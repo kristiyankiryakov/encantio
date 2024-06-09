@@ -1,4 +1,5 @@
-import { Review } from "../Review/ReviewType"
+import { Review } from "./Review"
+
 
 export type Product = {
     createdAt: number

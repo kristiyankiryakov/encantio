@@ -1,8 +1,8 @@
 package com.mishka.mishkabackend.Entity.Review;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mishka.mishkabackend.Entity.BaseEntity;
 import com.mishka.mishkabackend.Entity.Product.Product;
-import com.mishka.mishkabackend.Entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -25,13 +25,19 @@ public class Review extends BaseEntity {
     @Size(max = 100)
     private String email;
 
+    @Size(max = 100)
+    private String name;
+
     @Column(nullable = false)
     private String body;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
     private Integer rating;
+
+    private Boolean approved = false;
 
 }

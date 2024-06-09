@@ -2,8 +2,8 @@ import { useMemo } from "react";
 import { HiTrash } from "react-icons/hi";
 import useDraggable from "../../../hooks/useDraggable";
 import useProductStore from "../../../stores/ProductStore";
-import { handleImageDeletion, updateProduct } from "../services/ProductHelper";
-import { Product } from "../ProductType";
+import { handleImageDeletion, updateProduct } from "../../services/ProductHelper";
+import { Product } from "../../../types/Product";
 
 type Props = {
     productImages: File[] | null

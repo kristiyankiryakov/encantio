@@ -2,7 +2,7 @@ import { Button, FileInput, Label } from 'flowbite-react';
 import { useState } from 'react';
 import useProductStore from '../../../stores/ProductStore';
 import ImagesList from './ImagesList';
-import { uploadFilesAndGetUrl } from '../services/ProductHelper';
+import { uploadFilesAndGetUrl } from '../../services/ProductHelper';
 
 
 const ProductImages = () => {

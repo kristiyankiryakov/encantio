@@ -1,7 +1,7 @@
 import { Pagination, Table } from "flowbite-react";
-import { Product } from "../ProductType";
 import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
+import { Product } from "../../../types/Product";
 
 
 type Props = {
