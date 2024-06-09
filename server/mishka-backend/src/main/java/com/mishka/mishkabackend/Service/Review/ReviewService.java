@@ -12,4 +12,8 @@ public interface ReviewService {
     List<ReviewDTO> getAll();
 
     ReviewDTO getReviewById(Integer reviewId);
+
+    ReviewDTO updateReviewStatus(Integer reviewId, boolean isApproved);
+
+    void deleteReview(Integer reviewId);
 }

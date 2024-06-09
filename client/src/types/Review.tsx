@@ -1,6 +1,12 @@
 export type Review = {
-    email: string
-    body: string
-    rating: number
-    product_id: number
+    id?: number;
+    name: string;
+    email: string;
+    product: {
+        name: string
+        id: number
+    }
+    body: string;
+    approved: boolean;
+    rating: number;
 }

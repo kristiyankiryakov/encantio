@@ -73,4 +73,27 @@ public class ReviewServiceImpl implements ReviewService {
                 review.getApproved()
         );
     }
+
+    @Override
+    public ReviewDTO updateReviewStatus(Integer reviewId, boolean isApproved) {
+        restValidator.isValidIntegerId(reviewId);
+
+        Review review = reviewRepository.findById(reviewId.longValue())
+                .orElseThrow(() -> new NotFoundException("Review not found with id ", reviewId));
+
+        review.setApproved(isApproved);
+        Review updatedReview = reviewRepository.save(review);
+
+        return mapToReviewDTO(updatedReview);
+    }
+
+    @Override
+    public void deleteReview(Integer reviewId) {
+        restValidator.isValidIntegerId(reviewId);
+
+        Review review = reviewRepository.findById(reviewId.longValue())
+                .orElseThrow(() -> new NotFoundException("Review not found with id ", reviewId));
+
+        reviewRepository.delete(review);
+    }
 }
