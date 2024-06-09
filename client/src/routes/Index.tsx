@@ -1,11 +1,11 @@
-import Login from "../Login/Login";
 import Dashboard from "../Manage/Dashboard";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 import Landing from "../landing/Index"
 import Products from "../Manage/Product/Table/Index"
 import Single from "../Manage/Product/Single/Single";
-
+import Login from "../Login/Login";
+import Review from "../Manage/Review/Index";
 
 const Routes = () => {
     const routesForPublic = [
@@ -38,7 +38,11 @@ const Routes = () => {
                 },
                 {
                     path: 'products/create',
-                    element: <Single /> 
+                    element: <Single />
+                },
+                {
+                    path: 'reviews',
+                    element: <Review />
                 }
             ]
         }

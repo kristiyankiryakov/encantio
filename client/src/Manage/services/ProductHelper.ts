@@ -1,9 +1,9 @@
 import { deleteObject, getDownloadURL, ref as storageRef, uploadBytesResumable } from "firebase/storage";
 import { toast } from 'react-toastify';
 import { v4 as uuid } from "uuid";
-import api from "../../../api";
-import { storage } from "../../../firebase";
-import { DefaultProduct, Product } from "../ProductType";
+import api from "../../api";
+import { storage } from "../../firebase";
+import { DefaultProduct, Product } from "../../types/Product";
 
 
 export const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, setProduct: (product: Product | DefaultProduct | ((prev: Product | DefaultProduct) => Product | DefaultProduct)) => void) => {

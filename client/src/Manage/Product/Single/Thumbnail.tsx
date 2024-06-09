@@ -1,7 +1,7 @@
 import { Button, FileInput, Label } from 'flowbite-react';
 import { useState } from 'react';
 import useProductStore from '../../../stores/ProductStore';
-import { uploadFilesAndGetUrl } from '../services/ProductHelper';
+import { uploadFilesAndGetUrl } from '../../services/ProductHelper';
 
 function Thumbnail() {
 

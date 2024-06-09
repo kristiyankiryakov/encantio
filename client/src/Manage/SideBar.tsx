@@ -43,7 +43,7 @@ function SideBar({ }: Props) {
                         <Sidebar.Item className="cursor-pointer">Refunds</Sidebar.Item>
                         <Sidebar.Item className="cursor-pointer">Shipping</Sidebar.Item>
                     </Sidebar.Collapse>
-                    <Sidebar.Item className="cursor-pointer" icon={HiInbox}>
+                    <Sidebar.Item onClick={() => navigate('/manage/reviews')} className="cursor-pointer" icon={HiInbox}>
                         Reviews
                     </Sidebar.Item>
                     <Sidebar.Item className="cursor-pointer" icon={HiOutlineGift}>

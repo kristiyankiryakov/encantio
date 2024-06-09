@@ -1,7 +1,7 @@
 import { Button } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
-import { DefaultProduct, Product } from '../ProductType';
-import { createProduct } from '../services/ProductHelper';
+import { createProduct } from '../../services/ProductHelper';
+import { DefaultProduct, Product } from '../../../types/Product';
 
 type Props = {
     product: Product | DefaultProduct

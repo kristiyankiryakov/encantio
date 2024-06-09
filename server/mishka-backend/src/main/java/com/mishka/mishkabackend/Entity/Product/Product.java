@@ -1,5 +1,7 @@
 package com.mishka.mishkabackend.Entity.Product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mishka.mishkabackend.Entity.BaseEntity;
 import com.mishka.mishkabackend.Entity.Review.Review;
 import jakarta.persistence.*;
@@ -39,6 +41,7 @@ public class Product extends BaseEntity {
     private List<String> images;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<Review> reviews;
 
     @Column(nullable = false)

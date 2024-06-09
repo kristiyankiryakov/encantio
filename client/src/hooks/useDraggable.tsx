@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
-import { DefaultProduct, Product } from '../Manage/Product/ProductType'
 import { toast } from 'react-toastify'
+import { DefaultProduct, Product } from '../types/Product';
 
 type Props = {
     setProductImages: (value: React.SetStateAction<File[] | null>) => void;

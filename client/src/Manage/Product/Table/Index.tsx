@@ -3,7 +3,7 @@ import { useState } from 'react';
 import useFetch from '../../../hooks/useFetch';
 import ProductModal from './ProductModal';
 import ProductTable from './ProductTable';
-import { Product } from '../ProductType';
+import { Product } from "../../../types/Product";
 
 const Index = () => {
 
