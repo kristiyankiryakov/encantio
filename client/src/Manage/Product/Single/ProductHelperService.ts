@@ -4,7 +4,7 @@ import api from "../../../api";
 import { DefaultProduct, Product } from "../ProductType";
 
 
-export const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, setProduct: React.Dispatch<React.SetStateAction<Product | DefaultProduct>>) => {
+export const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, setProduct: (product: Product | DefaultProduct | ((prev: Product | DefaultProduct) => Product | DefaultProduct)) => void) => {
 
     const { name, value } = e.target;
     setProduct(prevState => ({
@@ -41,11 +41,3 @@ export const updateProduct = async (data: Product) => {
         console.log(err);
     }
 }
-
-
-// export const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, isThumbnail: boolean) => {
-//     const files = e.target.files;
-//     if (files) {
-//         isThumbnail ? this.setThumbnail(files[0]) : this.setProductImages(Array.from(files));
-//     }
-// }

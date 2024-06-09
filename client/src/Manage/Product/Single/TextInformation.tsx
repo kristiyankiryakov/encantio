@@ -1,16 +1,12 @@
 import { FloatingLabel } from 'flowbite-react'
-import { Product, DefaultProduct } from '../ProductType'
+import useProductStore from '../../../stores/ProductStore'
 import { handleChange } from './ProductHelperService'
 
 
-type Props = {
-    product: Product | DefaultProduct
-    setProduct: React.Dispatch<React.SetStateAction<Product | DefaultProduct>>
-}
+const TextInformation = () => {
 
-const TextInformation = ({
-    product, setProduct
-}: Props) => {
+    const { product, setProduct } = useProductStore();
+
     return (
         <div className='bg-[#1d2127] p-6 rounded-md shadow-md'>
             <h2 className='text-xl font-semibold mb-4'>Basic Information</h2>

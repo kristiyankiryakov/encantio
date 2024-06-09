@@ -1,16 +1,11 @@
 import { Label, Radio } from "flowbite-react"
-import { DefaultProduct, Product } from "../ProductType"
+import useProductStore from "../../../stores/ProductStore"
 import { handleChange } from "./ProductHelperService"
 
+const ProductDetails = () => {
 
-type Props = {
-    product: Product | DefaultProduct
-    setProduct: React.Dispatch<React.SetStateAction<Product | DefaultProduct>>
-}
+    const { product, setProduct } = useProductStore();
 
-const ProductDetails = ({
-    product, setProduct
-}: Props) => {
     return (
         <div className='bg-[#1d2127] p-6 rounded-md shadow-md'>
             <div className='flex justify-between'>
