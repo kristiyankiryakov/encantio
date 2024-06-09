@@ -1,9 +1,8 @@
 // HelperService.ts
-import api from "../../../api";
-import { DefaultProduct, Product } from "../ProductType";
+import { deleteObject, ref } from "firebase/storage";
 import { toast } from 'react-toastify';
 import { storage } from '../../../firebase';
-import { deleteObject, ref } from "firebase/storage";
+import { DefaultProduct, Product } from "../ProductType";
 
 import {
     getDownloadURL,
@@ -11,23 +10,25 @@ import {
     uploadBytesResumable
 } from "firebase/storage";
 import { v4 as uuid } from 'uuid';
+import { updateProduct } from "./ProductHelperService";
 
 
-class ProductHelper {
+class ImageHelper {
     product: Product | DefaultProduct;
     setProduct: React.Dispatch<React.SetStateAction<Product | DefaultProduct>>;
     productImages: File[] | null;
     setProductImages: React.Dispatch<React.SetStateAction<File[] | null>>;
-    setThumbnail: React.Dispatch<React.SetStateAction<File | null>>;
     dragImage: React.MutableRefObject<number>;
+    setThumbnail: React.Dispatch<React.SetStateAction<File | null>>;
     draggedOverImage: React.MutableRefObject<number>;
 
-    constructor(product: Product | DefaultProduct,
+    constructor(
+        product: Product | DefaultProduct,
         setProduct: React.Dispatch<React.SetStateAction<Product | DefaultProduct>>,
         productImages: File[] | null,
         setProductImages: React.Dispatch<React.SetStateAction<File[] | null>>,
-        setThumbnail: React.Dispatch<React.SetStateAction<File | null>>,
         dragImage: React.MutableRefObject<number>,
+        setThumbnail: React.Dispatch<React.SetStateAction<File | null>>,
         draggedOverImage: React.MutableRefObject<number>,
     ) {
         this.product = product;
@@ -39,42 +40,6 @@ class ProductHelper {
         this.draggedOverImage = draggedOverImage;
     }
 
-    handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-        const { name, value } = e.target;
-        this.setProduct(prevState => ({
-            ...prevState,
-            [name]: name === 'featured' ? value === 'true' ? true : false : value
-        }));
-    }
-
-    async createProduct(product: DefaultProduct) {
-        try {
-            const config = {
-                method: "POST",
-                data: product
-            };
-
-            const response = await api<Product>('/products', config);
-            toast.success('Save product successfully!', { autoClose: 1000, theme: "dark" });
-            return response;
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
-    async updateProduct(data: Product) {
-        try {
-            const config = {
-                method: "PUT",
-                data
-            };
-
-            const response = await api(`/products/${data.id}`, config);
-            return response.data;
-        } catch (err) {
-            console.log(err);
-        }
-    }
 
     async handleImageDeletion(isSaved: boolean, index: number) {
         if (isSaved && this.product.images) {
@@ -88,7 +53,7 @@ class ProductHelper {
                     await deleteObject(imageRef);
                 }
 
-                const savedProduct = await this.updateProduct({ ...this.product, images: currentSavedImages } as Product);
+                const savedProduct = await updateProduct({ ...this.product, images: currentSavedImages } as Product);
                 this.setProduct(savedProduct);
                 toast.success('Image deleted successfully!', { autoClose: 1000, theme: 'dark' });
 
@@ -103,12 +68,6 @@ class ProductHelper {
         }
     }
 
-    handleImageUpload(e: React.ChangeEvent<HTMLInputElement>, isThumbnail: boolean, setThumbnail: React.Dispatch<React.SetStateAction<File | null>>) {
-        const files = e.target.files;
-        if (files) {
-            isThumbnail ? setThumbnail(files[0]) : this.setProductImages(Array.from(files));
-        }
-    }
 
     uploadFiles = async (images: File[] | null, isThumbnail: boolean) => {
         if (!images) return;
@@ -165,4 +124,4 @@ class ProductHelper {
     }
 }
 
-export default ProductHelper;
+export default ImageHelper;
