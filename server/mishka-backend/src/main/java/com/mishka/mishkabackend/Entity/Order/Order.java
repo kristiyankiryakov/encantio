@@ -1,5 +1,6 @@
 package com.mishka.mishkabackend.Entity.Order;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mishka.mishkabackend.Entity.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
@@ -21,6 +22,7 @@ import java.util.List;
 @Table(name = "orders")
 public class Order extends BaseEntity {
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems;
 

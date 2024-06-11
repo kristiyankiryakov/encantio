@@ -7,16 +7,19 @@ import com.mishka.mishkabackend.Repository.Order.OrderItemRepository;
 import com.mishka.mishkabackend.Repository.Order.OrderRepository;
 import com.mishka.mishkabackend.Service.Product.ProductService;
 import com.mishka.mishkabackend.Validator.RestValidator;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
@@ -58,6 +61,10 @@ public class OrderServiceImpl implements OrderService {
         Order createdOrder = this.initiliazeOrder(customerEmail);
 
         this.addOrderItems(createdOrder, orderItems);
+
+        BigDecimal total = this.calculateOrderTotal(createdOrder, orderItems);
+
+        createdOrder.setTotal(total);
 
         return createdOrder;
     }
@@ -144,9 +151,23 @@ public class OrderServiceImpl implements OrderService {
 
             orderItem.setOrder(order);
             this.createOrderItem(orderItem);
-            this.calculateOrderPrice(order, orderItem);
         }
 
+    }
+
+    private BigDecimal calculateOrderTotal(Order order, List<OrderItem> orderItems) {
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (OrderItem orderItem : orderItems) {
+            // Calculate total price for the current order item
+            BigDecimal orderItemTotal = orderItem.getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity()));
+            total = total.add(orderItemTotal);
+        }
+
+        // Set the total price for the order
+        order.setTotal(total);
+
+        return total;
     }
 
     private void calculateOrderPrice(Order order, OrderItem orderItem) {
