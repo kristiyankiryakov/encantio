@@ -1,8 +1,6 @@
 import { useState } from "react";
-import Preview from "./Preview";
-import TableReview from "./Table";
-
-
+import TableReview from "./ReviewTable";
+import ReviewModal from "./ReviewModal";
 
 
 const Index: React.FC = () => {
@@ -19,7 +17,7 @@ const Index: React.FC = () => {
                 <TableReview setOpenModal={setOpenModal} />
             </div>
 
-            <Preview openModal={openModal} setOpenModal={setOpenModal} />
+            <ReviewModal openModal={openModal} setOpenModal={setOpenModal} />
 
 
         </div>

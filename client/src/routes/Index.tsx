@@ -1,11 +1,11 @@
-import Dashboard from "../Manage/Dashboard";
+import Dashboard from "../Manage/Dashboard/Index";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 import Landing from "../landing/Index"
 import Products from "../Manage/Product/Table/Index"
-import Single from "../Manage/Product/Single/Single";
+import Single from "../Manage/Product/Single/Index";
 import Login from "../Login/Login";
-import Review from "../Manage/Review/Index";
+import Review from "../Manage/Review/Table/Index";
 
 const Routes = () => {
     const routesForPublic = [

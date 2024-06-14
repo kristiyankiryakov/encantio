@@ -6,7 +6,7 @@ import SaveOrDiscard from './SaveOrDiscard';
 import TextInformation from './TextInformation';
 import Thumbnail from './Thumbnail';
 
-const Single = () => {
+const Index = () => {
 
     const { product } = useProduct();
 
@@ -40,4 +40,4 @@ const Single = () => {
     )
 }
 
-export default Single
+export default Index
