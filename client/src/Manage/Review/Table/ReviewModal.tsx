@@ -12,7 +12,7 @@ type Props = {
 
 }
 
-const Preview = ({ openModal, setOpenModal }: Props) => {
+const ReviewModal = ({ openModal, setOpenModal }: Props) => {
     return (
         <Modal show={openModal.state} onClose={() => setOpenModal((p) => ({ ...p, state: false }))}>
             <Modal.Header>Review Body</Modal.Header>
@@ -32,4 +32,4 @@ const Preview = ({ openModal, setOpenModal }: Props) => {
     )
 }
 
-export default Preview
+export default ReviewModal

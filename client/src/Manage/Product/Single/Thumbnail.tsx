@@ -2,6 +2,7 @@ import { Button, FileInput, Label } from 'flowbite-react';
 import { useState } from 'react';
 import useProductStore from '../../../stores/ProductStore';
 import { uploadFilesAndGetUrl } from '../../services/ProductHelper';
+import { DefaultProduct, Product } from '../../../types/Product';
 
 function Thumbnail() {
 
@@ -11,7 +12,7 @@ function Thumbnail() {
     const handleThumbnailUpload = async () => {
         if (thumbnail) {
             const [url] = await uploadFilesAndGetUrl([thumbnail]) as string[];
-            url && setProduct((prev) => ({ ...prev, thumbnail: url }));
+            url && setProduct((prev :(Product | DefaultProduct)) => ({ ...prev, thumbnail: url }));
             setThumbnail(null);
         }
     }

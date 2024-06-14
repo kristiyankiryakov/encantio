@@ -1,7 +1,7 @@
 import { Table } from "flowbite-react";
-import useFetch from "../../hooks/useFetch";
-import { Review } from "../../types/Review";
-import { approveReview, deleteReview } from "../services/ReviewHelper";
+import useFetch from "../../../hooks/useFetch";
+import { Review } from "../../../types/Review";
+import { approveReview, deleteReview } from "../../services/ReviewHelper";
 
 
 type Props = {
