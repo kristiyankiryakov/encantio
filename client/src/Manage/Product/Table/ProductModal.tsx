@@ -21,6 +21,7 @@ type Props = {
 }
 
 const ProductModal = ({ invalidateFetch, openModal, setOpenModal }: Props) => {
+    
 
     const deleteProduct = async (id: number): Promise<void> => {
         try {

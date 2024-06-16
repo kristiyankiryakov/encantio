@@ -6,6 +6,8 @@ import Products from "../Manage/Product/Table/Index"
 import Single from "../Manage/Product/Single/Index";
 import Login from "../Login/Login";
 import Review from "../Manage/Review/Table/Index";
+import Order from "../Manage/Order/Table/Index";
+import SingleOrder from "../Manage/Order/Single/Index";
 
 const Routes = () => {
     const routesForPublic = [
@@ -43,6 +45,14 @@ const Routes = () => {
                 {
                     path: 'reviews',
                     element: <Review />
+                },
+                {
+                    path: 'orders',
+                    element: <Order />
+                },
+                {
+                    path: 'orders/:id',
+                    element: <SingleOrder />
                 }
             ]
         }

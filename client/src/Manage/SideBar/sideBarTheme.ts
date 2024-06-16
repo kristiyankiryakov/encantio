@@ -5,7 +5,7 @@ export const customTheme = {
             "on": "w-16",
             "off": "w-64"
         },
-        "inner": "h-full overflow-y-auto overflow-x-hidden bg-[#191d23] px-3 py-4 "
+        "inner": "h-full overflow-y-auto overflow-x-hidden bg-[#292929] px-3 py-4 border-r-2 border-white/10"
     },
     "collapse": {
         "button": "group flex w-full items-center rounded-lg p-2 text-base font-normal text-gray-100 transition duration-75 hover:bg-gray-700 ",

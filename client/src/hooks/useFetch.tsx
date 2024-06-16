@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from 'react'
-import api from '../api';
 import { AxiosError } from 'axios';
+import { useCallback, useEffect, useState } from 'react';
+import api from '../api';
 
 
 const useFetch = <T,>(url: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE') => {
@@ -12,6 +12,7 @@ const useFetch = <T,>(url: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE') =>
     const invalidateFetch = useCallback(() => {
         setInvalidate(prev => !prev);
     }, []);
+
 
     useEffect(() => {
         (async () => {

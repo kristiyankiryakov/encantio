@@ -1,7 +1,7 @@
 import { Pagination, Table } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
-import { useMemo } from "react";
 import { Product } from "../../../types/Product";
+import { productTableColumns } from "../../Constants/ProductTableColumns";
 
 
 type Props = {
@@ -15,19 +15,11 @@ type Props = {
     productPerPage: number
     currentPage: number
     setCurrentPage: React.Dispatch<React.SetStateAction<number>>
-
-    filter: string
-
 }
 
-const ProductTable = ({ products, filter, currentPage, setOpenModal, errorMsg, setCurrentPage }: Props) => {
+const ProductTable = ({ products, currentPage, setOpenModal, errorMsg, setCurrentPage }: Props) => {
 
     const navigate = useNavigate();
-
-
-    const currentProducts = useMemo(() => {
-        return products && products.filter((product) => product.name.includes(filter));
-    }, [products, filter, currentPage]);
 
     return (
         <div className="flex flex-col h-3/4 justify-between gap-y-3" >
@@ -36,22 +28,14 @@ const ProductTable = ({ products, filter, currentPage, setOpenModal, errorMsg, s
             <div className=" w-10/12 mx-auto">
                 <Table striped>
                     <Table.Head>
-                        <Table.HeadCell className="p-4">
-                            ID
-                        </Table.HeadCell>
-                        <Table.HeadCell>Product name</Table.HeadCell>
-                        <Table.HeadCell>Stock</Table.HeadCell>
-                        <Table.HeadCell>Featured</Table.HeadCell>
-                        <Table.HeadCell>Price</Table.HeadCell>
-                        <Table.HeadCell>
-                            <span className="sr-only">Edit</span>
-                        </Table.HeadCell>
-                        <Table.HeadCell>
-                            <span className="sr-only">Delete</span>
-                        </Table.HeadCell>
+                        {productTableColumns.map((name) => {
+                            return (
+                                <Table.HeadCell>{name}</Table.HeadCell>
+                            )
+                        })}
                     </Table.Head>
                     <Table.Body className="divide-y">
-                        {currentProducts && currentProducts.map((product) => {
+                        {products && products.map((product) => {
                             return (
                                 <Table.Row key={product.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                     <Table.Cell className="p-4">
