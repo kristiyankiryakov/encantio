@@ -1,10 +1,10 @@
 import { Button } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
 import { createProduct } from '../../services/ProductHelper';
-import { DefaultProduct, Product } from '../../../types/Product';
+import { Product } from '../../../types/Product';
 
 type Props = {
-    product: Product | DefaultProduct
+    product: Product
 }
 
 const SaveOrDiscard = ({ product }: Props) => {
@@ -17,7 +17,7 @@ const SaveOrDiscard = ({ product }: Props) => {
             <Button
                 color="warning" className='dark:bg-warning' >Discard</Button>
             <Button onClick={() => {
-                createProduct(product as DefaultProduct).then((r) => navigate(`/manage/products/${r?.data.id}`));
+                createProduct(product).then((r) => navigate(`/manage/products/${r?.data.id}`));
 
             }} color='gray' className='dark:bg-green-400 dark:text-white'
             >Save Changes

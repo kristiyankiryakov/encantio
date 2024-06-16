@@ -1,12 +1,13 @@
 import { create } from 'zustand';
-import { DefaultProduct, Product } from '../Manage/Product/ProductType';
+import { Product } from '../types/Product';
+
 
 interface ProductState {
-  product: Product | DefaultProduct;
-  setProduct: (product: Product | DefaultProduct | ((prev: Product | DefaultProduct) => Product | DefaultProduct)) => void
+  product: Product
+  setProduct: (product: Product | ((prev: Product) => Product)) => void
 }
 
-const defaultProduct: DefaultProduct = {
+const defaultProduct: Product = {
   description: '',
   featured: false,
   images: null,

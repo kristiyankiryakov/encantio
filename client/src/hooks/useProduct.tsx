@@ -1,11 +1,12 @@
 import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { DefaultProduct, Product } from '../Manage/Product/ProductType';
+
 import api from '../api';
 import useProductStore from '../stores/ProductStore';
+import { Product } from '../types/Product';
 
-const defaultProduct: DefaultProduct = {
+const defaultProduct: Product = {
     description: '',
     featured: false,
     images: null,
@@ -15,10 +16,6 @@ const defaultProduct: DefaultProduct = {
     price: 0,
     thumbnail: null
 };
-
-function isProduct(product: Product | DefaultProduct): product is Product {
-    return (product as Product).id !== undefined;
-}
 
 
 const useProduct = () => {
@@ -48,7 +45,7 @@ const useProduct = () => {
         }
     }, [id]);
 
-    return { product, loading, errorMsg, setProduct, isProduct };
+    return { product, loading, errorMsg, setProduct };
 };
 
 export default useProduct;
