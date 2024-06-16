@@ -46,7 +46,7 @@ function SideBar({ }: Props) {
                     <Sidebar.Item onClick={() => navigate('/manage/reviews')} className="cursor-pointer" icon={HiInbox}>
                         Reviews
                     </Sidebar.Item>
-                    <Sidebar.Item className="cursor-pointer" icon={HiOutlineGift}>
+                    <Sidebar.Item onClick={() => navigate('/manage/orders')} className="cursor-pointer" icon={HiOutlineGift}>
                         Orders
                     </Sidebar.Item>
                     <Sidebar.Item className="cursor-pointer" icon={HiLockOpen}>
