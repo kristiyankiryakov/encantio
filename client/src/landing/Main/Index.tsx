@@ -3,8 +3,8 @@ import ProductCard from './ProductCard';
 
 function Index() {
     return (
-        <div>
-            <div className='bg-[#090A18] xs:w-11/12 md:w-10/12 lg:8/12 mx-auto' >
+        <div className='bg-[#090A18]'>
+            <div className='bg-[#090A18] xs:w-11/12 md:w-10/12 lg:8/12 mx-auto pb-10' >
 
                 <div className=' flex justify-between text-white xs:py-10 xl:py-20' >
                     <h1 className='xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-lg' >Най-търсените модели</h1>

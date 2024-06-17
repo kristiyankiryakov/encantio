@@ -12,7 +12,7 @@ const Index = () => {
 
       <section className='bg-white pb-10'>
 
-        <h1 className="text-[#090A18] pt-24 text-3xl text-center font-medium">Издигни мишката си на ново ниво</h1>
+        <h1 className="text-[#090A18] text-3xl text-center font-medium">Издигни мишката си на ново ниво</h1>
 
         <div className='perks-container flex xl:flex-row justify-around mt-10'>
           <Perk icon={star} heading={perkText.qualityText.heading} text={perkText.qualityText.subHeading} />

@@ -1,46 +1,35 @@
-import UpSeparator from './Separotors/UpSeparator'
+import DownWaveGray from "../assets/down-wave-gray.svg"
+import DownWave from "../assets/down-wave.svg"
+import UpWaveGray from "../assets/up-wave-gray.svg"
+import UpWave from "../assets/up-wave.svg"
+import FAQ from './FAQ/Index'
+import FeatureCards from "./FeatureCards/Index"
+import Footer from './Footer/Index'
 import Header from "./Header/Index"
 import Main from "./Main/Index"
-import FeatureCards from "./FeatureCards/Index"
-import DownSeparator from './Separotors/DownSeparator'
-import Testimonial from './Testimonial/Index'
+import SvgSeparator from "./Separotors/SvgSeparator"
 import SocialProof from './SocialProof/Index'
-import FAQ from './FAQ/Index'
-import Footer from './Footer/Index'
-
+import Testimonial from './Testimonial/Index'
 type Props = {}
 
 const Index = (props: Props) => {
     return (
         <div className='ROOT h-full w-full font-custom1' >
-            <div className='bg-[#090A18]' >
-                <Header />
-                <Main />
-                <UpSeparator color='white' />
-            </div>
+            <Header />
+            <Main />
+            <SvgSeparator image={UpWave} />
 
-            <div className='bg-white' >
-                <FeatureCards />
-                <DownSeparator backgroundColor="white" />
+            <FeatureCards />
+            <SvgSeparator image={DownWave} />
+            <Testimonial />
 
-                <Testimonial />
-            </div>
-
-            <div className='bg-[#090A18]' >
-                <UpSeparator color='gray-100' />
-                <SocialProof />
-            </div>
-
+            <SvgSeparator image={UpWaveGray} />
+            <SocialProof />
             <FAQ />
 
-            <div className='bg-gray-100' >
-                <DownSeparator backgroundColor="gray-100" />
-            </div>
-
+            <SvgSeparator image={DownWaveGray} />
             <Footer />
-
-
-        </div>
+        </div >
     )
 }
 
