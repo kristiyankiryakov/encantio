@@ -21,7 +21,7 @@ function Text() {
                    <div className='flex lg:flex-row xs:flex-col gap-2 justify-around items-center lg:w-8/12 pb-5'>
                     {
                         perks.map((text) => {
-                            return <PerkElement circleColor={'white'} textColor='#fff' text={text} />
+                            return <PerkElement key={text} circleColor={'white'} textColor='#fff' text={text} />
                         })
                     }
                 </div>

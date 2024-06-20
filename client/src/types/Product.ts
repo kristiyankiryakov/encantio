@@ -14,3 +14,11 @@ export type Product = {
     stock: number
     price: number
 }
+
+export type ProductItem = {
+    id: number
+    thumbnail: string
+    quantity: number
+    price: number
+    name: string
+}

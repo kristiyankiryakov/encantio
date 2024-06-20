@@ -1,18 +1,23 @@
 
-import CartButton from "./CartButton";
-import OrderNowNavBtn from "./OrderNowNavBtn"
+import Drawer from '@mui/material/Drawer';
 import {
     TEDropdown,
-    TEDropdownToggle,
-    TEDropdownMenu,
     TEDropdownItem,
+    TEDropdownMenu,
+    TEDropdownToggle,
 } from "tw-elements-react";
+import { useCartStore } from "../../stores/CartStore";
+import CartContainer from "../Cart/Index";
+import OrderNowNavBtn from "./OrderNowNavBtn";
 
 function Navigation() {
 
     const pageButtons = [
         "Продукти", "Предимства", "За нас", "Контакти"
     ]
+
+    const { isCartOpen, toggleCart } = useCartStore();
+
 
     return (
         <div className='p-4 bg-[#090A18] xs:text-xs sm:text-sm md:text-lg'>
@@ -21,7 +26,7 @@ function Navigation() {
                 <div className='LOGO xs:text-2xl'>ENACNTIO</div>
 
                 <div className='group-buttons md:flex 2xl:gap-10 xs:hidden gap-3'>
-                    {pageButtons.map((text) => <button className="" >{text}</button>)}
+                    {pageButtons.map((text) => <button key={text} className="" >{text}</button>)}
                 </div>
 
                 <OrderNowNavBtn />
@@ -41,8 +46,8 @@ function Navigation() {
 
                             <TEDropdownMenu className="rounded-sm bg-gray-700" >
 
-                                {pageButtons.map(text => {
-                                    return <TEDropdownItem className="bg-gray-700 pointer-events-auto" >
+                                {pageButtons.map((text, index) => {
+                                    return <TEDropdownItem key={text + index} className="bg-gray-700 pointer-events-auto" >
                                         <a href="#" className="block rounded-sm w-full min-w-[160px] cursor-pointer whitespace-nowrap bg-transparent px-4 py-2 text-sm text-left font-normal active:bg-gray-500">
                                             {text}
                                         </a>
@@ -52,7 +57,10 @@ function Navigation() {
                         </TEDropdown>
                     </div>
 
-                    <CartButton />
+
+                    <Drawer anchor={`right`} open={isCartOpen} onClose={() => toggleCart(false)}>
+                        <CartContainer toggleCart={toggleCart} />
+                    </Drawer>
                 </div>
 
             </nav >

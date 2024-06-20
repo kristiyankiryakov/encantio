@@ -40,7 +40,7 @@ public class Product extends BaseEntity {
 
     private List<String> images;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Review> reviews;
 
