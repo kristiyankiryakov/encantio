@@ -19,7 +19,7 @@ const Index = () => {
                 <div className='flex lg:flex-row xs:flex-col gap-2 justify-around items-center lg:w-10/12 '>
                     {
                         perks.map((text) => {
-                            return <PerkElement circleColor='black' textColor='#090A18' text={text} />
+                            return <PerkElement key={text} circleColor='black' textColor='#090A18' text={text} />
                         })
                     }
                 </div>

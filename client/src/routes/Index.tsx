@@ -8,12 +8,17 @@ import Login from "../Login/Login";
 import Review from "../Manage/Review/Table/Index";
 import Order from "../Manage/Order/Table/Index";
 import SingleOrder from "../Manage/Order/Single/Index";
+import ViewProducts from "../landing/ViewProducts/Index";
 
 const Routes = () => {
     const routesForPublic = [
         {
             path: "/",
             element: <Landing />,
+        },
+        {
+            path: "/products",
+            element: <ViewProducts />
         },
         {
             path: "/admin/login",
