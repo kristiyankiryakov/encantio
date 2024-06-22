@@ -30,7 +30,7 @@ public class Review extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonBackReference
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JoinColumn(name = "product_id")
     private Product product;
 
     private Integer rating;

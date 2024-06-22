@@ -29,7 +29,7 @@ public class ProductController {
     }
 
     @PostMapping()
-    Product newProduct(@RequestBody Product newProduct) {
+    Product newProduct(@RequestBody Product newProduct) throws BadRequestException {
         return productService.createProduct(newProduct);
     }
 
@@ -40,13 +40,8 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    Product updateProduct(@RequestBody Product newProduct, @PathVariable Integer id) {
+    Product updateProduct(@RequestBody Product newProduct, @PathVariable Integer id) throws BadRequestException {
         return productService.updateProduct(newProduct, id);
-    }
-
-    @PatchMapping("/feature/{id}")
-    Product setProductFeature(@PathVariable Integer id, @RequestBody Map<String, Object> body) throws BadRequestException {
-        return productService.setProductFeature(id, body);
     }
 
     @DeleteMapping("/{id}")

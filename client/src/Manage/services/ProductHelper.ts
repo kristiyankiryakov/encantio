@@ -3,10 +3,11 @@ import { toast } from 'react-toastify';
 import { v4 as uuid } from "uuid";
 import api from "../../api";
 import { storage } from "../../firebase";
-import { DefaultProduct, Product } from "../../types/Product";
+import { Product } from "../../types/Product";
+import { AxiosError } from "axios";
 
 
-export const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, setProduct: (product: Product | DefaultProduct | ((prev: Product | DefaultProduct) => Product | DefaultProduct)) => void) => {
+export const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, setProduct: (product: Product | ((prev: Product) => Product)) => void) => {
 
     const { name, value } = e.target;
     setProduct(prevState => ({
@@ -15,7 +16,7 @@ export const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAre
     }));
 }
 
-export const createProduct = async (product: DefaultProduct) => {
+export const createProduct = async (product: Product) => {
     try {
         const config = {
             method: "POST",
@@ -25,7 +26,10 @@ export const createProduct = async (product: DefaultProduct) => {
         const response = await api<Product>('/products', config);
         toast.success('Save product successfully!', { autoClose: 1000, theme: "dark" });
         return response;
-    } catch (err) {
+    } catch (err: unknown) {
+        if (err instanceof AxiosError && err.response) {
+            toast.error(err.response.data.message, { autoClose: 1000, theme: "dark" })
+        }
         console.log(err);
     }
 }
@@ -40,6 +44,9 @@ export const updateProduct = async (data: Product) => {
         const response = await api(`/products/${data.id}`, config);
         return response.data;
     } catch (err) {
+        if (err instanceof AxiosError && err.response) {
+            toast.error(err.response.data.message, { autoClose: 1000, theme: "dark" })
+        }
         console.log(err);
     }
 }

@@ -11,13 +11,13 @@ public interface ProductService {
 
     List<Product> getAllProducts(int pageNumber, int pageSize);
 
-    Product createProduct(Product newProduct);
+    Product createProduct(Product newProduct) throws BadRequestException;
 
     Product findProductById(Integer id) throws NotFoundException;
 
-    Product updateProduct(Product newProduct, Integer id);
+    Product updateProduct(Product newProduct, Integer id) throws BadRequestException;
 
     Void deleteProduct(Integer id) throws NotFoundException;
 
-    Product setProductFeature(Integer id, Map<String, Object> body) throws BadRequestException;
+
 }

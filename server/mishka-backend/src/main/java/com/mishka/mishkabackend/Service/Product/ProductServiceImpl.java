@@ -28,7 +28,6 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository = productRepository;
     }
 
-
     @Override
     public List<Product> getAllProducts(int pageNumber, int pageSize) {
         PageRequest pageable = PageRequest.of(pageNumber, pageSize);
@@ -37,7 +36,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product createProduct(Product newProduct) {
+    public Product createProduct(Product newProduct)throws BadRequestException {
+        if (newProduct.getFeatured() && productRepository.countByFeatured() >= 3) {
+            throw new BadRequestException("Limit of featured products (3) exceeded.");
+        }
+
         return productRepository.save(newProduct);
     }
 
@@ -48,9 +51,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product updateProduct(Product newProduct, Integer id) {
+    public Product updateProduct(Product newProduct, Integer id) throws BadRequestException {
 
         restValidator.isValidIntegerId(id);
+
+        if (newProduct.getFeatured() && productRepository.countByFeatured() >= 3) {
+            throw new BadRequestException("Limit of featured products (3) exceeded.");
+        }
+
 
         return productRepository.findById(id)
                 .map(product -> {
@@ -80,27 +88,5 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    @Override
-    public Product setProductFeature(Integer id, Map<String, Object> body) throws BadRequestException {
-        if (!body.containsKey("state") || body.get("state") == null) {
-            throw new BadRequestException("Request body must contain the 'state' field. or it is null");
-        }
-        restValidator.isValidIntegerId(id);
-
-        Boolean state = (Boolean) body.get("state");
-
-        long countFeatured = productRepository.countByFeatured(true);
-
-        if (countFeatured >= 3 && state) {
-            throw new BadRequestException("Limit of featured products (3) exceeded.");
-        }
-
-        return productRepository.findById(id)
-                .map(product -> {
-                    product.setFeatured(state);
-                    return productRepository.save(product);
-                })
-                .orElseThrow(() -> new NotFoundException("product", id));
-    }
 
 }
