@@ -11,7 +11,7 @@ const Index = ({ toggleCart }: Props) => {
 
     const { increaseQuantity, decreaseQuantity, removeFromCart, cart } = useCartStore();
 
-  
+
 
     return (
         <Box sx={{ width: 400 }} role="presentation" className='bg-[#2e2f3b] h-full flex flex-col justify-between' >
@@ -24,7 +24,7 @@ const Index = ({ toggleCart }: Props) => {
                 <div>
                     {cart.length ? cart.map((item) => {
                         return (
-                            <div className='p-2 flex gap-x-2 items-center pb-5'>
+                            <div key={item.id} className='p-2 flex gap-x-2 items-center pb-5'>
                                 <div className='w-20 max-w-[8rem] border-[1px] border-gray-600 rounded-sm relative' >
                                     <img className='w-full object-cover' src={item.thumbnail} alt="product-image" />
                                     <p onClick={() => removeFromCart(item.id)} className='flex justify-center items-center absolute -top-1 -left-1 text-white/80 bg-gray-600/90 rounded-full h-4 w-4 cursor-pointer' >x</p>
@@ -40,7 +40,7 @@ const Index = ({ toggleCart }: Props) => {
 
                                             <button onClick={() => decreaseQuantity(item.id)} type="button" id="decrement-button" data-input-counter-decrement="quantity-input" className="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg py-1 px-2 h-5 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                                 <svg className="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                                    <path stroke="currentColor" strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d="M1 1h16" />
                                                 </svg>
                                             </button>
 
@@ -48,7 +48,7 @@ const Index = ({ toggleCart }: Props) => {
 
                                             <button onClick={() => increaseQuantity(item.id)} type="button" id="increment-button" data-input-counter-increment="quantity-input" className="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-1 px-2 h-5 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                                 <svg className="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                                    <path stroke="currentColor" strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d="M9 1v16M1 9h16" />
                                                 </svg>
                                             </button>
 

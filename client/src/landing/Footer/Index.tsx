@@ -7,12 +7,14 @@ import MailIcon from "../../assets/Mail.png"
 
 const perks = ["Бърза доставка с Еконт", "Дълъг живот на продуктите", "Отстъпки за комплекти"];
 
-const Index = () => {
+const Index = (
+    { hidden }: { hidden?: string }
+) => {
     return (
         <div className='bg-[#090A18]' >
 
-            <div className='Card bg-electricGreen w-10/12 rounded-xl mx-auto flex flex-col justify-between items-center py-20 gap-20' >
-                <p className='text-[#090A18] text-center xl:text-6xl font-bold w-10/12 text-pretty tracking' >Постигнете повече комфорт<br /> и точност с нови крачета за<br /> мишката си</p>
+            <div className={`Card bg-electricGreen w-10/12 rounded-xl ${hidden} mx-auto flex flex-col justify-between items-center py-20 gap-20`} >
+                <p className='text-[#090A18] text-center xs:text-xl xl:text-4xl font-bold xs:w-12/12 xl:w-10/12 text-pretty tracking' >Постигнете повече комфорт<br /> и точност с нови крачета за<br /> мишката си</p>
 
                 <button className='text-white px-10 py-4 text-xl bg-[#090A18] w-fit rounded-md' >Разгледайте моделите</button>
 
