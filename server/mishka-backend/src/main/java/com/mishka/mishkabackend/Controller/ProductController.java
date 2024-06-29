@@ -1,9 +1,11 @@
 package com.mishka.mishkabackend.Controller;
 
 import com.mishka.mishkabackend.Entity.Product.Product;
+import com.mishka.mishkabackend.Exception.NotFoundException;
 import com.mishka.mishkabackend.Service.Product.ProductService;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,6 +49,11 @@ public class ProductController {
     @DeleteMapping("/{id}")
     Void deleteProductById(@PathVariable Integer id) {
         return productService.deleteProduct(id);
+    }
+
+    @PostMapping("/{productId}/{tagId}")
+    Product addTagToProduct(@PathVariable Integer productId, @PathVariable Integer tagId) throws BadRequestException, NotFoundException {
+        return productService.handleTagToProduct(productId, tagId);
     }
 
 }

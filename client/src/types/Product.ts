@@ -1,4 +1,5 @@
 import { Review } from "./Review"
+import { Tag } from "./Tag"
 
 
 export type Product = {
@@ -13,6 +14,7 @@ export type Product = {
     reviews: Review[] | []
     stock: number
     price: number
+    tags: Tag[]
 }
 
 export type ProductItem = {

@@ -5,10 +5,11 @@ import ProductImages from './ProductImages';
 import SaveOrDiscard from './SaveOrDiscard';
 import TextInformation from './TextInformation';
 import Thumbnail from './Thumbnail';
+import ProductTags from './ProductTags';
 
 const Index = () => {
 
-    const { product } = useProduct();
+    const { product, setProduct } = useProduct();
 
     return (
         <div className='w-full p-10'>
@@ -23,9 +24,10 @@ const Index = () => {
 
                     <ProductDetails />
 
+                    <ProductTags product={product} setProduct={setProduct} />
+
 
                     <ProductImages />
-
                 </div>
 
                 <Thumbnail />

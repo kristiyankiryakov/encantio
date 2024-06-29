@@ -10,7 +10,7 @@ const ProductDetails = () => {
         <div className='bg-[#1d2127] p-6 rounded-md shadow-md'>
             <div className='flex justify-between'>
                 <fieldset className="flex max-w-md gap-4">
-                    <legend className="mb-4 text-gray-300">Should the product appear on the landing</legend>
+                    <legend className="mb-4 text-gray-300">Feature product</legend>
                     <div className="flex items-center gap-2 ">
                         <Radio id="featured" name="featured"
                             className='cursor-pointer'

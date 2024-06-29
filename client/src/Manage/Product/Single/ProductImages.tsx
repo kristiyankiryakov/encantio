@@ -9,7 +9,7 @@ const ProductImages = () => {
 
     const { setProduct } = useProductStore();
     const [productImages, setProductImages] = useState<File[] | null>(null);
-    
+
     const handleProductImagesUpload = async () => {
         const urls = await uploadFilesAndGetUrl(productImages) as string[];
         setProduct((prev) => prev.images ? ({ ...prev, images: [...prev.images, ...urls] }) : (({ ...prev, images: urls })));
@@ -18,7 +18,7 @@ const ProductImages = () => {
 
     return (
         <div className='bg-[#1d2127] p-6 rounded-md shadow-md' >
-            <h2 className='text-xl font-semibold mb-4 text-gray-300'>Product images</h2>
+            <h2 className='text-xl font-semibold mb-4 text-gray-300'>Images</h2>
             <ImagesList setProductImages={setProductImages} productImages={productImages} />
 
             <div className='my-3' >

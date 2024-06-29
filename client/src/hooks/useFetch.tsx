@@ -22,7 +22,7 @@ const useFetch = <T,>(url: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE') =>
                     method,
 
                 };
-
+        
                 const response = await api(config);
                 setData(response.data);
             } catch (error) {

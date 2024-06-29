@@ -19,5 +19,5 @@ public interface ProductService {
 
     Void deleteProduct(Integer id) throws NotFoundException;
 
-
+    Product handleTagToProduct(Integer productId, Integer tagId) throws BadRequestException, NotFoundException;
 }

@@ -1,10 +1,13 @@
 package com.mishka.mishkabackend.Service.Product;
 
 import com.mishka.mishkabackend.Entity.Product.Product;
+import com.mishka.mishkabackend.Entity.Tag.Tag;
 import com.mishka.mishkabackend.Exception.NotFoundException;
 import com.mishka.mishkabackend.Repository.Product.ProductRepository;
+import com.mishka.mishkabackend.Repository.Tag.TagRepository;
 import com.mishka.mishkabackend.Validator.RestValidator;
 import org.apache.coyote.BadRequestException;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,9 +22,11 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-
     @Autowired
     private RestValidator restValidator;
+
+    @Autowired
+    private TagRepository tagRepository;
 
     @Autowired
     public ProductServiceImpl(ProductRepository productRepository) {
@@ -36,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product createProduct(Product newProduct)throws BadRequestException {
+    public Product createProduct(Product newProduct) throws BadRequestException {
         if (newProduct.getFeatured() && productRepository.countByFeatured() >= 3) {
             throw new BadRequestException("Limit of featured products (3) exceeded.");
         }
@@ -88,5 +93,23 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    @Override
+    public Product handleTagToProduct(Integer productId, Integer tagId) throws BadRequestException, NotFoundException {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new NotFoundException("product", productId));
+
+        Tag tag = tagRepository.findById(tagId)
+                .orElseThrow(() -> new NotFoundException("tag", tagId));
+
+        if (product.getTags().contains(tag)) {
+//            throw new BadRequestException("tag " + tag.getName() + " is already added to product.");
+            product.getTags().removeIf(t -> t.equals(tag));
+        } else {
+            product.getTags().add(tag);
+        }
+
+        return productRepository.save(product);
+
+    }
 
 }

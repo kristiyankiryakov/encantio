@@ -14,7 +14,8 @@ const defaultProduct: Product = {
     stock: 0,
     reviews: [],
     price: 0,
-    thumbnail: null
+    thumbnail: null,
+    tags: []
 };
 
 
