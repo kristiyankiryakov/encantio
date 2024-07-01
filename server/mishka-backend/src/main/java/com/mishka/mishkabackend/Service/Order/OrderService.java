@@ -21,7 +21,7 @@ public interface OrderService {
 
     OrderItem getOrderItemById(Integer id) throws NotFoundException;
 
-    OrderItem createOrderItem(OrderItem orderItem);
+//    OrderItem createOrderItem(OrderItem orderItem);
 
     OrderItem updateOrderItem(OrderItem orderItem, Integer id);
 

@@ -9,6 +9,7 @@ import Review from "../Manage/Review/Table/Index";
 import Order from "../Manage/Order/Table/Index";
 import SingleOrder from "../Manage/Order/Single/Index";
 import LandingProducts from "../landing/Products/Index";
+import SingleProduct from "../landing/SingleProduct/Index";
 
 const Routes = () => {
     const routesForPublic = [
@@ -23,6 +24,10 @@ const Routes = () => {
         {
             path: "/products",
             element: <LandingProducts />
+        },
+        {
+            path: "/products/:id",
+            element: <SingleProduct />
         }
     ];
 

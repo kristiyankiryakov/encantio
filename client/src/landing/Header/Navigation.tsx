@@ -9,15 +9,16 @@ import {
 import { useCartStore } from "../../stores/CartStore";
 import CartContainer from "../Cart/Index";
 import OrderNowNavBtn from "./OrderNowNavBtn";
+import { useNavigate } from 'react-router-dom';
 
 function Navigation() {
 
     const pageButtons = [
-        "Продукти", "Предимства", "За нас", "Контакти"
+        { page: "products", text: "Продукти" }, { page: "perks", text: "Предимства" }, { page: "contact-us", text: "За нас" }, { page: "contact", text: "Контакти" }
     ]
 
     const { isCartOpen, toggleCart } = useCartStore();
-
+    const navigate = useNavigate();
 
     return (
         <div className='p-4 bg-[#090A18] xs:text-xs sm:text-sm md:text-lg'>
@@ -26,7 +27,7 @@ function Navigation() {
                 <div className='LOGO xs:text-2xl'>ENACNTIO</div>
 
                 <div className='group-buttons md:flex 2xl:gap-10 xs:hidden gap-3'>
-                    {pageButtons.map((text) => <button key={text} className="" >{text}</button>)}
+                    {pageButtons.map((element) => <button onClick={() => navigate(`/${element.page}`)} key={element.text} className="" >{element.text}</button>)}
                 </div>
 
                 <OrderNowNavBtn />
@@ -46,10 +47,10 @@ function Navigation() {
 
                             <TEDropdownMenu className="rounded-sm bg-gray-700" >
 
-                                {pageButtons.map((text, index) => {
-                                    return <TEDropdownItem key={text + index} className="bg-gray-700 pointer-events-auto" >
-                                        <a href="#" className="block rounded-sm w-full min-w-[160px] cursor-pointer whitespace-nowrap bg-transparent px-4 py-2 text-sm text-left font-normal active:bg-gray-500">
-                                            {text}
+                                {pageButtons.map((element, index) => {
+                                    return <TEDropdownItem key={element.text + index} className="bg-gray-700 pointer-events-auto" >
+                                        <a onClick={() => navigate(`/${element.page}`)} className="block rounded-sm w-full min-w-[160px] cursor-pointer whitespace-nowrap bg-transparent px-4 py-2 text-sm text-left font-normal active:bg-gray-500">
+                                            {element.text}
                                         </a>
                                     </TEDropdownItem>
                                 })}

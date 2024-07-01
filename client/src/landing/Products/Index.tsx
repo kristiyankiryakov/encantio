@@ -11,6 +11,7 @@ import Navigation from "../Header/Navigation";
 import BottomCard from "../Main/BottomCard";
 import ProductCard from "../Main/ProductCard";
 import SvgSeparator from "../Separotors/SvgSeparator";
+import FixedCartButton from "../Cart/FixedCartButton";
 
 
 type Props = {}
@@ -86,9 +87,7 @@ const Index = (props: Props) => {
 
             <SvgSeparator image={UpWaveGray} />
             <Footer hidden="hidden" />
-
-            {/* <FixedCartButton /> */}
-
+            <FixedCartButton />
         </div >
     )
 }

@@ -66,13 +66,13 @@ public class OrderServiceImpl implements OrderService {
 
         createdOrder.setTotal(total);
 
-        return createdOrder;
+        return orderRepository.save(createdOrder);
     }
 
-    @Override
-    public OrderItem createOrderItem(OrderItem orderItem) {
-        return orderItemRepository.save(orderItem);
-    }
+//    @Override
+//    public OrderItem createOrderItem(OrderItem orderItem) {
+//        return orderItemRepository.save(orderItem);
+//    }
 
     @Override
     public List<OrderItem> createOrderItems(List<OrderItem> orderItems) {
@@ -150,9 +150,9 @@ public class OrderServiceImpl implements OrderService {
             productService.findProductById(orderItem.getProductId());
 
             orderItem.setOrder(order);
-            this.createOrderItem(orderItem);
-        }
 
+        }
+        order.setOrderItems(orderItems);
     }
 
     private BigDecimal calculateOrderTotal(Order order, List<OrderItem> orderItems) {
@@ -160,7 +160,7 @@ public class OrderServiceImpl implements OrderService {
 
         for (OrderItem orderItem : orderItems) {
             // Calculate total price for the current order item
-            BigDecimal orderItemTotal = orderItem.getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity()));
+            BigDecimal orderItemTotal = productService.findProductById(orderItem.getProductId()).getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity()));
             total = total.add(orderItemTotal);
         }
 
@@ -170,15 +170,12 @@ public class OrderServiceImpl implements OrderService {
         return total;
     }
 
-    private void calculateOrderPrice(Order order, OrderItem orderItem) {
-        order.setTotal(order.getTotal().add(orderItem.getPrice()));
-    }
-
     private Order initiliazeOrder(String customerEmail) {
-        Order newOrder = new Order();
-        newOrder.setEmail(customerEmail);
+        Order order = new Order();
+        order.setEmail(customerEmail);
+        order.setOrderItems(new ArrayList<>());
 
-        return orderRepository.save(newOrder);
+        return order;
     }
 
 }

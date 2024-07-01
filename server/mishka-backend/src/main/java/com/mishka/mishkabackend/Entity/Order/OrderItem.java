@@ -28,8 +28,4 @@ public class OrderItem extends BaseEntity {
     private Integer productId;
 
     private int quantity;
-
-    @NotNull
-    @DecimalMin(value = "0.00", inclusive = true, message = "Total must be greater than or equal to 0")
-    private BigDecimal price;
 }

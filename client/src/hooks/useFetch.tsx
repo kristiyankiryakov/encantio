@@ -22,8 +22,9 @@ const useFetch = <T,>(url: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE') =>
                     method,
 
                 };
-        
+
                 const response = await api(config);
+                setLoading(true);
                 setData(response.data);
             } catch (error) {
                 if (error instanceof AxiosError) {

@@ -6,7 +6,7 @@ const Index = () => {
             <section className='bg-gray-100'>
                 <h1 className='font-bold xs:text-2xl sm:text-4xl text-center text-[#090A18]'>Отзиви от запалени геймъри</h1>
 
-                <div className='flex gap-5 overflow-x-auto w-10/12 mx-auto xs:mt-10 sm:mt-20 rounded-lg p-12 custom-scrollbar'>
+                <div className='flex gap-5 overflow-x-auto w-10/12 mx-auto xs:mt-10 sm:mt-20 rounded-lg xs:p-4 xl:p-12 custom-scrollbar'>
                     <article className='single-review w-[36rem] flex flex-col gap-10 justify-around bg-white rounded-lg p-4 text-[#51535D] shadow-lg'>
                         <figure>
                             <img src={Stars} alt="review-stars" />
