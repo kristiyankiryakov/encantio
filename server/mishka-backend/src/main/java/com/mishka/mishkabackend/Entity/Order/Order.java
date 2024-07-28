@@ -26,9 +26,8 @@ public class Order extends BaseEntity {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems;
 
-    @Email(message = "Please provide a valid email address.")
-    @Column(nullable = false, unique = false)
-    private String email;
+    @Embedded
+    private CustomerInfo customerInfo;
 
     @NotNull
     @DecimalMin(value = "0.00", inclusive = true, message = "Total must be greater than or equal to 0")

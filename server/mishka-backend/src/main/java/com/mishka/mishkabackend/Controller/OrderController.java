@@ -1,5 +1,6 @@
 package com.mishka.mishkabackend.Controller;
 
+import com.mishka.mishkabackend.Dtos.Order.OrderDTO;
 import com.mishka.mishkabackend.Entity.Order.Order;
 import com.mishka.mishkabackend.Entity.Order.OrderItem;
 import com.mishka.mishkabackend.Service.Order.OrderService;
@@ -28,8 +29,8 @@ public class OrderController {
     }
 
     @PostMapping()
-    Order create(@RequestBody Order newOrder) {
-        return orderService.createOrder(newOrder.getEmail(), newOrder.getOrderItems());
+    OrderDTO create(@RequestBody OrderDTO newOrder) {
+        return orderService.createOrder(newOrder);
     }
 
     @PostMapping("/orderItems")

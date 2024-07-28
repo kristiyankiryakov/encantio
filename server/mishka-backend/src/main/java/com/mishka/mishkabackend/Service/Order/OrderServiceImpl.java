@@ -1,5 +1,8 @@
 package com.mishka.mishkabackend.Service.Order;
 
+import com.mishka.mishkabackend.Dtos.Order.OrderDTO;
+import com.mishka.mishkabackend.Dtos.Order.OrderItemDTO;
+import com.mishka.mishkabackend.Entity.Order.CustomerInfo;
 import com.mishka.mishkabackend.Entity.Order.Order;
 import com.mishka.mishkabackend.Entity.Order.OrderItem;
 import com.mishka.mishkabackend.Exception.NotFoundException;
@@ -7,6 +10,7 @@ import com.mishka.mishkabackend.Repository.Order.OrderItemRepository;
 import com.mishka.mishkabackend.Repository.Order.OrderRepository;
 import com.mishka.mishkabackend.Service.Product.ProductService;
 import com.mishka.mishkabackend.Validator.RestValidator;
+import com.mishka.mishkabackend.mapper.OrderMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,12 +34,16 @@ public class OrderServiceImpl implements OrderService {
 
     private final RestValidator restValidator;
 
+    private final OrderMapper orderMapper;
+
+
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, OrderItemRepository orderItemRepository, ProductService productService, RestValidator restValidator) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderItemRepository orderItemRepository, ProductService productService, RestValidator restValidator, OrderMapper orderMapper) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.productService = productService;
         this.restValidator = restValidator;
+        this.orderMapper = orderMapper;
     }
 
     @Override
@@ -53,20 +61,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order createOrder(String customerEmail, List<OrderItem> orderItems) {
+    public OrderDTO createOrder(OrderDTO newOrder) {
 
-        restValidator.validateEmailFormat(customerEmail);
-        restValidator.checkListNotEmpty(orderItems);
+        Order createdOrder = this.initiliazeOrder(newOrder.getCustomerInfo().getEmail());
 
-        Order createdOrder = this.initiliazeOrder(customerEmail);
+        this.addOrderItems(createdOrder, newOrder.getOrderItems());
 
-        this.addOrderItems(createdOrder, orderItems);
-
-        BigDecimal total = this.calculateOrderTotal(createdOrder, orderItems);
+        BigDecimal total = this.calculateOrderTotal(createdOrder, orderMapper.orderItemDTOsToOrderItems(newOrder.getOrderItems()));
 
         createdOrder.setTotal(total);
 
-        return orderRepository.save(createdOrder);
+        Order savedOrder = orderRepository.save(createdOrder);
+        return orderMapper.orderToOrderDTO(savedOrder);
     }
 
 //    @Override
@@ -94,7 +100,7 @@ public class OrderServiceImpl implements OrderService {
     public Order updateOrder(Order newOrder, Integer id) {
         return orderRepository.findById(id)
                 .map(order -> {
-                    order.setEmail(newOrder.getEmail());
+                    order.getCustomerInfo().setEmail(newOrder.getCustomerInfo().getEmail());
                     return orderRepository.save(order);
                 })
                 .orElseGet(() -> {
@@ -143,14 +149,14 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    private void addOrderItems(Order order, List<OrderItem> orderItems) {
+    private void addOrderItems(Order order, List<OrderItemDTO> orderItemDTOs) {
 
+        List<OrderItem> orderItems = orderMapper.orderItemDTOsToOrderItems(orderItemDTOs);
         for (OrderItem orderItem : orderItems) {
             restValidator.isValidIntegerId(orderItem.getProductId());
             productService.findProductById(orderItem.getProductId());
 
             orderItem.setOrder(order);
-
         }
         order.setOrderItems(orderItems);
     }
@@ -172,7 +178,9 @@ public class OrderServiceImpl implements OrderService {
 
     private Order initiliazeOrder(String customerEmail) {
         Order order = new Order();
-        order.setEmail(customerEmail);
+        CustomerInfo customerInfo = new CustomerInfo();
+        customerInfo.setEmail(customerEmail);
+        order.setCustomerInfo(customerInfo);
         order.setOrderItems(new ArrayList<>());
 
         return order;

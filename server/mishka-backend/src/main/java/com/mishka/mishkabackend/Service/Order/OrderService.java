@@ -1,5 +1,6 @@
 package com.mishka.mishkabackend.Service.Order;
 
+import com.mishka.mishkabackend.Dtos.Order.OrderDTO;
 import com.mishka.mishkabackend.Entity.Order.Order;
 import com.mishka.mishkabackend.Entity.Order.OrderItem;
 import com.mishka.mishkabackend.Exception.NotFoundException;
@@ -10,7 +11,7 @@ public interface OrderService {
 
     List<Order> getAllOrders(int pageNumber, int pageSize);
 
-    Order createOrder(String customerEmail, List<OrderItem> orderItems);
+    OrderDTO createOrder(OrderDTO newOrder);
 
     Order findOrderById(Integer id) throws NotFoundException;
 
