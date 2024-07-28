@@ -41,10 +41,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product createProduct(Product newProduct) throws BadRequestException {
-        if (newProduct.getFeatured() && productRepository.countByFeatured() >= 3) {
-            throw new BadRequestException("Limit of featured products (3) exceeded.");
-        }
+    public Product createProduct(Product newProduct) {
 
         return productRepository.save(newProduct);
     }
@@ -56,13 +53,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product updateProduct(Product newProduct, Integer id) throws BadRequestException {
+    public Product updateProduct(Product newProduct, Integer id) {
 
         restValidator.isValidIntegerId(id);
-
-        if (newProduct.getFeatured() && productRepository.countByFeatured() >= 3) {
-            throw new BadRequestException("Limit of featured products (3) exceeded.");
-        }
 
 
         return productRepository.findById(id)
@@ -94,7 +87,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product handleTagToProduct(Integer productId, Integer tagId) throws BadRequestException, NotFoundException {
+    public Product handleTagToProduct(Integer productId, Integer tagId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException("product", productId));
 
@@ -102,7 +95,6 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new NotFoundException("tag", tagId));
 
         if (product.getTags().contains(tag)) {
-//            throw new BadRequestException("tag " + tag.getName() + " is already added to product.");
             product.getTags().removeIf(t -> t.equals(tag));
         } else {
             product.getTags().add(tag);

@@ -2,6 +2,7 @@ package com.mishka.mishkabackend.Controller;
 
 import com.mishka.mishkabackend.Entity.Tag.Tag;
 import com.mishka.mishkabackend.Service.Tag.TagService;
+import jakarta.validation.Valid;
 import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class TagController {
     }
 
     @PostMapping
-    public Tag createTag(@RequestParam String name) throws BadRequestException {
+    public Tag createTag(@RequestParam @Valid String name) throws BadRequestException {
         return tagService.createTag(name);
     }
 }

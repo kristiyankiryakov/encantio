@@ -4,13 +4,16 @@ import com.mishka.mishkabackend.Dtos.Order.OrderDTO;
 import com.mishka.mishkabackend.Entity.Order.Order;
 import com.mishka.mishkabackend.Entity.Order.OrderItem;
 import com.mishka.mishkabackend.Service.Order.OrderService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
+@Validated
 public class OrderController {
 
     private final OrderService orderService;
@@ -29,42 +32,42 @@ public class OrderController {
     }
 
     @PostMapping()
-    OrderDTO create(@RequestBody OrderDTO newOrder) {
+    OrderDTO create(@Valid @RequestBody OrderDTO newOrder) {
         return orderService.createOrder(newOrder);
     }
 
     @PostMapping("/orderItems")
-    public List<OrderItem> createOrderItems(@RequestBody List<OrderItem> orderItems) {
+    public List<OrderItem> createOrderItems(@Valid @RequestBody List<OrderItem> orderItems) {
         return orderService.createOrderItems(orderItems);
     }
 
     @GetMapping("/{id}")
-    Order one(@PathVariable Integer id) {
+    Order one(@Valid @PathVariable Integer id) {
         return orderService.findOrderById(id);
     }
 
     @GetMapping("/orderItems/{id}")
-    public OrderItem getOrderItemById(@PathVariable Integer id) {
+    public OrderItem getOrderItemById(@Valid @PathVariable Integer id) {
         return orderService.getOrderItemById(id);
     }
 
     @PutMapping("/{id}")
-    Order updateOrder(@RequestBody Order newOrder, @PathVariable Integer id) {
+    Order updateOrder(@Valid @RequestBody Order newOrder, @Valid @PathVariable Integer id) {
         return orderService.updateOrder(newOrder, id);
     }
 
     @PutMapping("/orderItems/{id}")
-    public OrderItem updateOrderItem(@PathVariable Integer id, @RequestBody OrderItem orderItem) {
+    public OrderItem updateOrderItem(@Valid @PathVariable Integer id, @Valid @RequestBody OrderItem orderItem) {
         return orderService.updateOrderItem(orderItem, id);
     }
 
     @DeleteMapping("/{id}")
-    Void deleteOrderById(@PathVariable Integer id) {
+    Void deleteOrderById(@Valid @PathVariable Integer id) {
         return orderService.deleteOrder(id);
     }
 
     @DeleteMapping("/orderItems/{id}")
-    Void deleteOrderItemById(@PathVariable Integer id) {
+    Void deleteOrderItemById(@Valid @PathVariable Integer id) {
         return orderService.deleteOrderItem(id);
     }
 

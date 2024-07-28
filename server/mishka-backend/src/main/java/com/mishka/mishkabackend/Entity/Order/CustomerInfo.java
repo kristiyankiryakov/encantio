@@ -2,7 +2,9 @@ package com.mishka.mishkabackend.Entity.Order;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -10,7 +12,10 @@ import lombok.Data;
 @Data
 public class CustomerInfo {
 
-    @NotNull
+    @Valid
+
+    @NotNull(message = "firstName cannot be null")
+    @NotBlank(message = "First name is required")
     private String firstName;
 
     @NotNull

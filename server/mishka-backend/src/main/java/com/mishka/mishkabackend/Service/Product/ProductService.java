@@ -11,13 +11,13 @@ public interface ProductService {
 
     List<Product> getAllProducts(int pageNumber, int pageSize);
 
-    Product createProduct(Product newProduct) throws BadRequestException;
+    Product createProduct(Product newProduct);
 
     Product findProductById(Integer id) throws NotFoundException;
 
-    Product updateProduct(Product newProduct, Integer id) throws BadRequestException;
+    Product updateProduct(Product newProduct, Integer id);
 
     Void deleteProduct(Integer id) throws NotFoundException;
 
-    Product handleTagToProduct(Integer productId, Integer tagId) throws BadRequestException, NotFoundException;
+    Product handleTagToProduct(Integer productId, Integer tagId);
 }
