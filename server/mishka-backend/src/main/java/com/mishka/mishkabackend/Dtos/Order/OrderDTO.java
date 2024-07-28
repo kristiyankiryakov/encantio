@@ -1,5 +1,6 @@
 package com.mishka.mishkabackend.Dtos.Order;
 
+import com.mishka.mishkabackend.Entity.Order.CustomerInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDTO {
 
+    private Integer id;
     private List<OrderItemDTO> orderItems;
-    private CustomerInfoDTO customerInfo;
+    private CustomerInfo customerInfo;
     private BigDecimal total;
 }

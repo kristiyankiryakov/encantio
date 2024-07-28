@@ -63,11 +63,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDTO createOrder(OrderDTO newOrder) {
 
-        Order createdOrder = this.initiliazeOrder(newOrder.getCustomerInfo().getEmail());
+        Order createdOrder = this.initiliazeOrder(newOrder);
 
         this.addOrderItems(createdOrder, newOrder.getOrderItems());
 
-        BigDecimal total = this.calculateOrderTotal(createdOrder, orderMapper.orderItemDTOsToOrderItems(newOrder.getOrderItems()));
+        List<OrderItem> orderItems = orderMapper.orderItemDTOsToOrderItems(newOrder.getOrderItems());
+        BigDecimal total = this.calculateOrderTotal(createdOrder, orderItems);
 
         createdOrder.setTotal(total);
 
@@ -75,10 +76,6 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.orderToOrderDTO(savedOrder);
     }
 
-//    @Override
-//    public OrderItem createOrderItem(OrderItem orderItem) {
-//        return orderItemRepository.save(orderItem);
-//    }
 
     @Override
     public List<OrderItem> createOrderItems(List<OrderItem> orderItems) {
@@ -176,11 +173,9 @@ public class OrderServiceImpl implements OrderService {
         return total;
     }
 
-    private Order initiliazeOrder(String customerEmail) {
+    private Order initiliazeOrder(OrderDTO newOrder) {
         Order order = new Order();
-        CustomerInfo customerInfo = new CustomerInfo();
-        customerInfo.setEmail(customerEmail);
-        order.setCustomerInfo(customerInfo);
+        order.setCustomerInfo(newOrder.getCustomerInfo());
         order.setOrderItems(new ArrayList<>());
 
         return order;
