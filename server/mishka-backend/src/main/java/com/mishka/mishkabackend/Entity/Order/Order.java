@@ -2,6 +2,7 @@ package com.mishka.mishkabackend.Entity.Order;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mishka.mishkabackend.Entity.BaseEntity;
+import com.mishka.mishkabackend.Enums.DeliveryType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Email;
@@ -28,6 +29,12 @@ public class Order extends BaseEntity {
 
     @Embedded
     private CustomerInfo customerInfo;
+
+    @Embedded
+    private Address address;
+
+    @NotNull
+    private DeliveryType deliveryType;
 
     @NotNull
     @DecimalMin(value = "0.00", inclusive = true, message = "Total must be greater than or equal to 0")

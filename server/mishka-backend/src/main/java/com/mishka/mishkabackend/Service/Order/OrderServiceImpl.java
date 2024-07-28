@@ -5,6 +5,7 @@ import com.mishka.mishkabackend.Dtos.Order.OrderItemDTO;
 import com.mishka.mishkabackend.Entity.Order.CustomerInfo;
 import com.mishka.mishkabackend.Entity.Order.Order;
 import com.mishka.mishkabackend.Entity.Order.OrderItem;
+import com.mishka.mishkabackend.Enums.DeliveryType;
 import com.mishka.mishkabackend.Exception.NotFoundException;
 import com.mishka.mishkabackend.Repository.Order.OrderItemRepository;
 import com.mishka.mishkabackend.Repository.Order.OrderRepository;
@@ -73,6 +74,7 @@ public class OrderServiceImpl implements OrderService {
         createdOrder.setTotal(total);
 
         Order savedOrder = orderRepository.save(createdOrder);
+
         return orderMapper.orderToOrderDTO(savedOrder);
     }
 
@@ -177,6 +179,11 @@ public class OrderServiceImpl implements OrderService {
         Order order = new Order();
         order.setCustomerInfo(newOrder.getCustomerInfo());
         order.setOrderItems(new ArrayList<>());
+        order.setDeliveryType(newOrder.getDeliveryType());
+
+        if (newOrder.getDeliveryType() == DeliveryType.DELIVERY) {
+            order.setAddress(newOrder.getAddress());
+        }
 
         return order;
     }
