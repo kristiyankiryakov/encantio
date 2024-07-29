@@ -1,22 +1,30 @@
 package com.mishka.mishkabackend.Service.Order;
 
+import com.mishka.mishkabackend.Dtos.Order.OrderDTO;
+import com.mishka.mishkabackend.Dtos.Order.OrderItemDTO;
+import com.mishka.mishkabackend.Entity.Order.CustomerInfo;
 import com.mishka.mishkabackend.Entity.Order.Order;
 import com.mishka.mishkabackend.Entity.Order.OrderItem;
+import com.mishka.mishkabackend.Enums.DeliveryType;
 import com.mishka.mishkabackend.Exception.NotFoundException;
 import com.mishka.mishkabackend.Repository.Order.OrderItemRepository;
 import com.mishka.mishkabackend.Repository.Order.OrderRepository;
 import com.mishka.mishkabackend.Service.Product.ProductService;
 import com.mishka.mishkabackend.Validator.RestValidator;
+import com.mishka.mishkabackend.mapper.OrderMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
@@ -27,12 +35,16 @@ public class OrderServiceImpl implements OrderService {
 
     private final RestValidator restValidator;
 
+    private final OrderMapper orderMapper;
+
+
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, OrderItemRepository orderItemRepository, ProductService productService, RestValidator restValidator) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderItemRepository orderItemRepository, ProductService productService, RestValidator restValidator, OrderMapper orderMapper) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.productService = productService;
         this.restValidator = restValidator;
+        this.orderMapper = orderMapper;
     }
 
     @Override
@@ -50,22 +62,22 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order createOrder(String customerEmail, List<OrderItem> orderItems) {
+    public OrderDTO createOrder(OrderDTO newOrder) {
 
-        restValidator.validateEmailFormat(customerEmail);
-        restValidator.checkListNotEmpty(orderItems);
+        Order createdOrder = this.initiliazeOrder(newOrder);
 
-        Order createdOrder = this.initiliazeOrder(customerEmail);
+        this.addOrderItems(createdOrder, newOrder.getOrderItems());
 
-        this.addOrderItems(createdOrder, orderItems);
+        List<OrderItem> orderItems = orderMapper.orderItemDTOsToOrderItems(newOrder.getOrderItems());
+        BigDecimal total = this.calculateOrderTotal(createdOrder, orderItems);
 
-        return createdOrder;
+        createdOrder.setTotal(total);
+
+        Order savedOrder = orderRepository.save(createdOrder);
+
+        return orderMapper.orderToOrderDTO(savedOrder);
     }
 
-    @Override
-    public OrderItem createOrderItem(OrderItem orderItem) {
-        return orderItemRepository.save(orderItem);
-    }
 
     @Override
     public List<OrderItem> createOrderItems(List<OrderItem> orderItems) {
@@ -87,7 +99,7 @@ public class OrderServiceImpl implements OrderService {
     public Order updateOrder(Order newOrder, Integer id) {
         return orderRepository.findById(id)
                 .map(order -> {
-                    order.setEmail(newOrder.getEmail());
+                    order.getCustomerInfo().setEmail(newOrder.getCustomerInfo().getEmail());
                     return orderRepository.save(order);
                 })
                 .orElseGet(() -> {
@@ -136,28 +148,44 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    private void addOrderItems(Order order, List<OrderItem> orderItems) {
+    private void addOrderItems(Order order, List<OrderItemDTO> orderItemDTOs) {
 
+        List<OrderItem> orderItems = orderMapper.orderItemDTOsToOrderItems(orderItemDTOs);
         for (OrderItem orderItem : orderItems) {
             restValidator.isValidIntegerId(orderItem.getProductId());
             productService.findProductById(orderItem.getProductId());
 
             orderItem.setOrder(order);
-            this.createOrderItem(orderItem);
-            this.calculateOrderPrice(order, orderItem);
+        }
+        order.setOrderItems(orderItems);
+    }
+
+    private BigDecimal calculateOrderTotal(Order order, List<OrderItem> orderItems) {
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (OrderItem orderItem : orderItems) {
+            // Calculate total price for the current order item
+            BigDecimal orderItemTotal = productService.findProductById(orderItem.getProductId()).getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity()));
+            total = total.add(orderItemTotal);
         }
 
+        // Set the total price for the order
+        order.setTotal(total);
+
+        return total;
     }
 
-    private void calculateOrderPrice(Order order, OrderItem orderItem) {
-        order.setTotal(order.getTotal().add(orderItem.getPrice()));
-    }
+    private Order initiliazeOrder(OrderDTO newOrder) {
+        Order order = new Order();
+        order.setCustomerInfo(newOrder.getCustomerInfo());
+        order.setOrderItems(new ArrayList<>());
+        order.setDeliveryType(newOrder.getDeliveryType());
 
-    private Order initiliazeOrder(String customerEmail) {
-        Order newOrder = new Order();
-        newOrder.setEmail(customerEmail);
+        if (newOrder.getDeliveryType() == DeliveryType.DELIVERY) {
+            order.setAddress(newOrder.getAddress());
+        }
 
-        return orderRepository.save(newOrder);
+        return order;
     }
 
 }

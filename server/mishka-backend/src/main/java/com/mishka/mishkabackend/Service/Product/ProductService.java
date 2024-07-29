@@ -19,5 +19,5 @@ public interface ProductService {
 
     Void deleteProduct(Integer id) throws NotFoundException;
 
-    Product setProductFeature(Integer id, Map<String, Object> body) throws BadRequestException;
+    Product handleTagToProduct(Integer productId, Integer tagId);
 }

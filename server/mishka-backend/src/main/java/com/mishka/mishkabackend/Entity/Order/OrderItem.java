@@ -1,5 +1,6 @@
 package com.mishka.mishkabackend.Entity.Order;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mishka.mishkabackend.Entity.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
@@ -18,6 +19,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class OrderItem extends BaseEntity {
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", referencedColumnName = "id", nullable = false)
     private Order order;
@@ -26,8 +28,4 @@ public class OrderItem extends BaseEntity {
     private Integer productId;
 
     private int quantity;
-
-    @NotNull
-    @DecimalMin(value = "0.00", inclusive = true, message = "Total must be greater than or equal to 0")
-    private BigDecimal price;
 }

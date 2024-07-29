@@ -1,6 +1,8 @@
 package com.mishka.mishkabackend.Entity.Order;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mishka.mishkabackend.Entity.BaseEntity;
+import com.mishka.mishkabackend.Enums.DeliveryType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Email;
@@ -21,12 +23,18 @@ import java.util.List;
 @Table(name = "orders")
 public class Order extends BaseEntity {
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems;
 
-    @Email(message = "Please provide a valid email address.")
-    @Column(nullable = false, unique = false)
-    private String email;
+    @Embedded
+    private CustomerInfo customerInfo;
+
+    @Embedded
+    private Address address;
+
+    @NotNull
+    private DeliveryType deliveryType;
 
     @NotNull
     @DecimalMin(value = "0.00", inclusive = true, message = "Total must be greater than or equal to 0")

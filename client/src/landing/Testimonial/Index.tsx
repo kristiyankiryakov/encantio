@@ -4,7 +4,7 @@ import Testimonial from "../../assets/testimonail.png";
 const Index = () => {
     return (
 
-        <div className='bg-[#090A18] pb-20' >
+        <div className='bg-[#090A18] pt-10 pb-32' >
 
             <div className='bg-[#171826] flex md:flex-row xs:flex-col xs:items-center xs:gap-y-5 xs:w-10/12 mx-auto rounded-lg justify-between xl:p-8 xs:p-4 Card xl:gap-x-10' >
 

@@ -1,10 +1,13 @@
 package com.mishka.mishkabackend.Service.Product;
 
 import com.mishka.mishkabackend.Entity.Product.Product;
+import com.mishka.mishkabackend.Entity.Tag.Tag;
 import com.mishka.mishkabackend.Exception.NotFoundException;
 import com.mishka.mishkabackend.Repository.Product.ProductRepository;
+import com.mishka.mishkabackend.Repository.Tag.TagRepository;
 import com.mishka.mishkabackend.Validator.RestValidator;
 import org.apache.coyote.BadRequestException;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,15 +22,16 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-
     @Autowired
     private RestValidator restValidator;
+
+    @Autowired
+    private TagRepository tagRepository;
 
     @Autowired
     public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-
 
     @Override
     public List<Product> getAllProducts(int pageNumber, int pageSize) {
@@ -38,6 +42,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product createProduct(Product newProduct) {
+
         return productRepository.save(newProduct);
     }
 
@@ -52,6 +57,7 @@ public class ProductServiceImpl implements ProductService {
 
         restValidator.isValidIntegerId(id);
 
+
         return productRepository.findById(id)
                 .map(product -> {
                     product.setDescription(newProduct.getDescription());
@@ -59,6 +65,7 @@ public class ProductServiceImpl implements ProductService {
                     product.setPrice(newProduct.getPrice());
                     product.setStock(newProduct.getStock());
                     product.setFeatured(newProduct.getFeatured());
+                    product.setThumbnail(newProduct.getThumbnail());
                     return productRepository.save(product);
                 })
                 .orElseGet(() -> {
@@ -80,26 +87,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product setProductFeature(Integer id, Map<String, Object> body) throws BadRequestException {
-        if (!body.containsKey("state") || body.get("state") == null) {
-            throw new BadRequestException("Request body must contain the 'state' field. or it is null");
+    public Product handleTagToProduct(Integer productId, Integer tagId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new NotFoundException("product", productId));
+
+        Tag tag = tagRepository.findById(tagId)
+                .orElseThrow(() -> new NotFoundException("tag", tagId));
+
+        if (product.getTags().contains(tag)) {
+            product.getTags().removeIf(t -> t.equals(tag));
+        } else {
+            product.getTags().add(tag);
         }
-        restValidator.isValidIntegerId(id);
 
-        Boolean state = (Boolean) body.get("state");
+        return productRepository.save(product);
 
-        long countFeatured = productRepository.countByFeatured(true);
-
-        if (countFeatured >= 3 && state) {
-            throw new BadRequestException("Limit of featured products (3) exceeded.");
-        }
-
-        return productRepository.findById(id)
-                .map(product -> {
-                    product.setFeatured(state);
-                    return productRepository.save(product);
-                })
-                .orElseThrow(() -> new NotFoundException("product", id));
     }
 
 }
