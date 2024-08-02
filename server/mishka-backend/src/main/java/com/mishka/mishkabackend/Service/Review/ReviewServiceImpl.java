@@ -7,7 +7,6 @@ import com.mishka.mishkabackend.Entity.Review.Review;
 import com.mishka.mishkabackend.Exception.NotFoundException;
 import com.mishka.mishkabackend.Repository.Review.ReviewRepository;
 import com.mishka.mishkabackend.Service.Product.ProductService;
-import com.mishka.mishkabackend.Validator.RestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +23,6 @@ public class ReviewServiceImpl implements ReviewService {
     private final ProductService productService;
 
     @Autowired
-    private RestValidator restValidator;
-
-    @Autowired
     public ReviewServiceImpl(ReviewRepository reviewRepository, ProductService productService) {
         this.reviewRepository = reviewRepository;
         this.productService = productService;
@@ -34,11 +30,8 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public ReviewDTO createReview(Integer productId, Review review) {
-        restValidator.isValidIntegerId(productId);
-        Product product = productService.findProductById(productId); // Fetch the product
 
-        restValidator.checkNullOrBlank(review.getBody());
-        restValidator.isValidIntegerId(review.getRating());
+        Product product = productService.findProductById(productId); // Fetch the product
 
         review.setProduct(product); // Set the fetched product in the review
         Review savedReview = reviewRepository.save(review);
@@ -76,7 +69,6 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public ReviewDTO updateReviewStatus(Integer reviewId, boolean isApproved) {
-        restValidator.isValidIntegerId(reviewId);
 
         Review review = reviewRepository.findById(reviewId.longValue())
                 .orElseThrow(() -> new NotFoundException("Review not found with id ", reviewId));
@@ -89,7 +81,6 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public void deleteReview(Integer reviewId) {
-        restValidator.isValidIntegerId(reviewId);
 
         Review review = reviewRepository.findById(reviewId.longValue())
                 .orElseThrow(() -> new NotFoundException("Review not found with id ", reviewId));

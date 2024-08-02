@@ -5,7 +5,6 @@ import com.mishka.mishkabackend.Entity.Tag.Tag;
 import com.mishka.mishkabackend.Exception.NotFoundException;
 import com.mishka.mishkabackend.Repository.Product.ProductRepository;
 import com.mishka.mishkabackend.Repository.Tag.TagRepository;
-import com.mishka.mishkabackend.Validator.RestValidator;
 import org.apache.coyote.BadRequestException;
 import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,6 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-    @Autowired
-    private RestValidator restValidator;
 
     @Autowired
     private TagRepository tagRepository;
@@ -54,9 +51,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product updateProduct(Product newProduct, Integer id) {
-
-        restValidator.isValidIntegerId(id);
-
 
         return productRepository.findById(id)
                 .map(product -> {

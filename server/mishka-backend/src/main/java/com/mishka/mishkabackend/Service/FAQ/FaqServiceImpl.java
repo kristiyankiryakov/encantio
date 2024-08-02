@@ -6,7 +6,6 @@ import com.mishka.mishkabackend.Enums.FaqType;
 import com.mishka.mishkabackend.Exception.NotFoundException;
 import com.mishka.mishkabackend.Repository.FAQ.AnswerRepository;
 import com.mishka.mishkabackend.Repository.FAQ.QuestionRepository;
-import com.mishka.mishkabackend.Validator.RestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,22 +22,14 @@ public class FaqServiceImpl implements FaqService {
     @Autowired
     private AnswerRepository answerRepository;
 
-    @Autowired
-    private RestValidator restValidator;
-
     @Override
     public Question createQuestion(Question question) {
-
-        restValidator.checkNullOrBlank(question.getQuestionText());
 
         return questionRepository.save(question);
     }
 
     @Override
     public Answer createAnswer(Answer answer) {
-
-        restValidator.checkNullOrBlank(answer.getAnswerText());
-        restValidator.isValidIntegerId(answer.getQuestionId());
 
         this.doesQuestionIdExist(answer.getQuestionId());
 
@@ -59,8 +50,6 @@ public class FaqServiceImpl implements FaqService {
 
     @Override
     public Optional<Question> updateQuestion(Question newQuestion, Integer id) {
-        restValidator.checkNullOrBlank(newQuestion.getQuestionText());
-        restValidator.isValidIntegerId(id);
         this.doesEntityExistById(FaqType.QUESTION, id);
 
         return questionRepository.findById(id)
@@ -74,9 +63,6 @@ public class FaqServiceImpl implements FaqService {
 
     @Override
     public Optional<Answer> updateAnswer(Answer newAnswer, Integer id) {
-
-        restValidator.checkNullOrBlank(newAnswer.getAnswerText());
-        restValidator.isValidIntegerId(id);
 
         this.doesEntityExistById(FaqType.ANSWER, id);
 
@@ -103,7 +89,6 @@ public class FaqServiceImpl implements FaqService {
 
     @Override
     public Void deleteQuestionWithAnswer(Integer id) {
-        restValidator.isValidIntegerId(id);
         this.doesEntityExistById(FaqType.QUESTION, id);
 
 

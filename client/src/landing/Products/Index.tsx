@@ -1,22 +1,19 @@
 import { Dropdown } from "flowbite-react";
-import { ChangeEvent, useMemo, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import UpWaveGray from "../../assets/down-wave-gray.svg";
 import DownWaveGray from "../../assets/up-wave-gray.svg";
 import useFetch from "../../hooks/useFetch";
 import { Product } from "../../types/Product";
+import FixedCartButton from "../Cart/FixedCartButton";
 import FAQ from "../FAQ/Index";
 import Footer from "../Footer/Index";
 import Navigation from "../Header/Navigation";
 import BottomCard from "../Main/BottomCard";
 import ProductCard from "../Main/ProductCard";
 import SvgSeparator from "../Separotors/SvgSeparator";
-import FixedCartButton from "../Cart/FixedCartButton";
 
-
-type Props = {}
-
-const Index = (props: Props) => {
+const Index = () => {
 
     const [filter, setFiler] = useState("");
     const { data } = useFetch<Product[]>(`products`, 'GET');

@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react'
-import { toast } from 'react-toastify'
-import { DefaultProduct, Product } from '../types/Product';
+import React, { useRef, useState } from 'react';
+import { toast } from 'react-toastify';
+import { Product } from '../types/Product';
 
 type Props = {
     setProductImages: (value: React.SetStateAction<File[] | null>) => void;
-    setProduct: (product: Product | DefaultProduct | ((prev: Product | DefaultProduct) => Product | DefaultProduct)) => void;
+    setProduct: (product: Product | ((prev: Product) => Product)) => void;
 }
 
 const useDraggable = ({ setProductImages, setProduct }: Props) => {

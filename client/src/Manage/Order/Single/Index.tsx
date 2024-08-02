@@ -1,11 +1,9 @@
 import { Label, Table, Textarea } from "flowbite-react";
+import { HiOutlinePencil } from "react-icons/hi";
 import { useParams } from "react-router-dom";
 import FeetImage from "../../../assets/feet-image.png";
-import { HiOutlinePencil } from "react-icons/hi";
 
-type Props = {}
-
-const Index = (props: Props) => {
+const Index = () => {
 
     const { id } = useParams();
 
