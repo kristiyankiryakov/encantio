@@ -4,8 +4,6 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 import api from "../../../api";
 import { Product } from "../../../types/Product";
 
-
-
 type Props = {
     invalidateFetch: () => void
 
@@ -21,7 +19,7 @@ type Props = {
 }
 
 const ProductModal = ({ invalidateFetch, openModal, setOpenModal }: Props) => {
-    
+
 
     const deleteProduct = async (id: number): Promise<void> => {
         try {
@@ -47,7 +45,7 @@ const ProductModal = ({ invalidateFetch, openModal, setOpenModal }: Props) => {
                         <div className="flex justify-center gap-4">
                             <Button color="failure" onClick={() => {
                                 if (openModal.product) {
-                                    deleteProduct(openModal.product.id);
+                                    deleteProduct(openModal.product.id as number);
                                 }
                                 setOpenModal(() => ({ product: null, show: false }))
                             }}>

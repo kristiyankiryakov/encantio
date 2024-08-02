@@ -1,10 +1,8 @@
-import { Pagination, Table } from "flowbite-react"
+import { Pagination, Table } from "flowbite-react";
 import { useState } from "react";
 import { orderProductTableColumns } from "../../Constants/ProductTableColumns";
 
-type Props = {}
-
-const Index = (props: Props) => {
+const Index = () => {
 
     const [pagination, setPagination] = useState({
         currentPage: 1,

@@ -2,7 +2,6 @@ package com.mishka.mishkabackend.Service.Order;
 
 import com.mishka.mishkabackend.Dtos.Order.OrderDTO;
 import com.mishka.mishkabackend.Dtos.Order.OrderItemDTO;
-import com.mishka.mishkabackend.Entity.Order.CustomerInfo;
 import com.mishka.mishkabackend.Entity.Order.Order;
 import com.mishka.mishkabackend.Entity.Order.OrderItem;
 import com.mishka.mishkabackend.Enums.DeliveryType;
@@ -10,7 +9,6 @@ import com.mishka.mishkabackend.Exception.NotFoundException;
 import com.mishka.mishkabackend.Repository.Order.OrderItemRepository;
 import com.mishka.mishkabackend.Repository.Order.OrderRepository;
 import com.mishka.mishkabackend.Service.Product.ProductService;
-import com.mishka.mishkabackend.Validator.RestValidator;
 import com.mishka.mishkabackend.mapper.OrderMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,17 +31,14 @@ public class OrderServiceImpl implements OrderService {
 
     private final ProductService productService;
 
-    private final RestValidator restValidator;
-
     private final OrderMapper orderMapper;
 
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, OrderItemRepository orderItemRepository, ProductService productService, RestValidator restValidator, OrderMapper orderMapper) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderItemRepository orderItemRepository, ProductService productService, OrderMapper orderMapper) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.productService = productService;
-        this.restValidator = restValidator;
         this.orderMapper = orderMapper;
     }
 
@@ -152,7 +147,6 @@ public class OrderServiceImpl implements OrderService {
 
         List<OrderItem> orderItems = orderMapper.orderItemDTOsToOrderItems(orderItemDTOs);
         for (OrderItem orderItem : orderItems) {
-            restValidator.isValidIntegerId(orderItem.getProductId());
             productService.findProductById(orderItem.getProductId());
 
             orderItem.setOrder(order);
